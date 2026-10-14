@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nosotros | Costa Palmeras</title>
+  <meta name="description" content="Conocé la historia, la misión, la visión y el equipo de Costa Palmeras.">
+  <meta name="theme-color" content="#FAF6F0">
+  <link rel="icon" href="./images/logopalmeras.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: { 900: '#062B1B', 700: '#145A38' },
+            teal: { deep: '#00763F', caribe: '#2FA566' },
+            sand: { 50: '#FAF6F0', 100: '#F8F5F0', 200: '#E8E6D6' },
+            gold: { DEFAULT: '#FFB81C', soft: '#FFD27A' }
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root { --night:#062B1B; --green:#00763F; --gold:#FFB81C; --ivory:#FAF6F0; --ease:cubic-bezier(.22,.8,.26,1); }
+    html { scroll-padding-top: 88px; }
+    body { font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:var(--ivory); color:var(--night); -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; }
+    :focus-visible { outline:2px solid var(--gold); outline-offset:3px; border-radius:4px; }
+    #nav { background:rgba(250,246,240,.97); box-shadow:0 8px 28px rgba(6,43,27,.1); backdrop-filter:blur(14px); }
+    .nav-link { position:relative; padding:6px 2px; color:#145A38; font-size:.88rem; font-weight:500; transition:color .25s; }
+    .nav-link:hover,.nav-link.active { color:var(--green); }
+    .nav-link::after { content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0; background:var(--gold); transition:width .3s var(--ease); }
+    .nav-link:hover::after,.nav-link.active::after { width:100%; }
+    .btn-gold { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; padding:.85rem 1.5rem; border-radius:999px; background:linear-gradient(135deg,#FFD27A,#FFB81C); color:#062B1B; font-weight:600; box-shadow:0 8px 24px rgba(255,184,28,.24); transition:transform .3s var(--ease); }
+    .btn-gold:hover { transform:translateY(-2px); }
+    .team-avatar { background:linear-gradient(145deg,#E5F1E7,#C6DFD0); border:5px solid white; box-shadow:0 12px 28px rgba(6,43,27,.12); }
+    .rule { height:1px; background:linear-gradient(90deg,rgba(0,118,63,.45),rgba(0,118,63,0)); }
+    .mv-section { position:relative; isolation:isolate; overflow:hidden; background-color:#F3EEE3; background-image:repeating-linear-gradient(0deg,rgba(6,43,27,.018) 0,rgba(6,43,27,.018) 1px,transparent 1px,transparent 5px); }
+    .mv-grid { display:grid; gap:2rem; }
+    .mv-item { display:grid; grid-template-columns:46px minmax(0,1fr); align-items:start; gap:1rem; transition:transform .25s var(--ease); }
+    .mv-icon { display:grid; width:46px; height:46px; place-items:center; border:1px solid rgba(0,118,63,.16); border-radius:50%; background:rgba(0,118,63,.075); color:#145A38; transition:background-color .25s var(--ease),border-color .25s var(--ease); }
+    .mv-heading { display:flex; align-items:baseline; gap:.8rem; }
+    .mv-heading h2 { margin:0; color:#123D2B; font-size:1.65rem; line-height:1.15; font-weight:600; }
+    .mv-index { color:#AFC2AE; font-size:.76rem; font-weight:600; font-variant-numeric:tabular-nums; }
+    .mv-copy p { max-width:37rem; margin-top:.65rem; color:#43594C; font-size:.94rem; line-height:1.75; }
+    .mv-values { margin-top:2.25rem; padding-top:1.8rem; border-top:1px solid rgba(0,118,63,.16); }
+    .mv-values-list { display:flex; flex-wrap:wrap; gap:.35rem .65rem; margin-top:.7rem; color:#43594C; font-size:.94rem; }
+    .mv-values-list li[aria-hidden="true"] { color:#8FA98F; }
+    @media (min-width:768px) {
+      .mv-grid { grid-template-columns:1fr 1fr; gap:0; }
+      .mv-grid > .mv-item:first-child { padding-right:2.5rem; }
+      .mv-grid > .mv-item:nth-child(2) { padding-left:2.5rem; border-left:1px solid rgba(0,118,63,.16); }
+    }
+    @media (hover:hover) {
+      .mv-item:hover { transform:translateY(-2px); }
+      .mv-item:hover .mv-icon { border-color:rgba(0,118,63,.3); background:rgba(0,118,63,.12); }
+    }
+    @media (max-width:480px) {
+      .mv-item { grid-template-columns:40px minmax(0,1fr); gap:.8rem; }
+      .mv-icon { width:40px; height:40px; }
+      .mv-heading h2 { font-size:1.5rem; }
+    }
+    .nosotros-hero { position:relative; isolation:isolate; overflow:hidden; background:#062B1B; color:#fff; }
+    .nosotros-hero { display:flex; min-height:min(760px,100svh); align-items:flex-end; }
+    .nosotros-hero::after { position:absolute; z-index:-1; inset:0; content:''; background:linear-gradient(90deg,rgba(6,43,27,.82),rgba(6,43,27,.3) 75%),linear-gradient(0deg,rgba(6,43,27,.72),transparent 75%); }
+    .hero-poster,.nosotros-hero video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .hero-poster { z-index:-3; object-position:center 45%; }
+    .nosotros-hero video { z-index:-2; }
+    .nosotros-hero > div { position:relative; z-index:1; }
+    .hero-corner-logo { position:absolute; z-index:0; right:0; bottom:0; width:clamp(250px,48vw,760px); height:auto; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; opacity:.55; filter:drop-shadow(0 6px 16px rgba(0,0,0,.42)); pointer-events:none; }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; } }
+  </style>
+</head>
+<body>
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 py-4">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
+      <a href="index.html#inicio" class="flex shrink-0 items-center" aria-label="Costa Palmeras, inicio">
+        <img src="./images/cropped-logo-horizontal-350x66.png" alt="Costa Palmeras" class="h-9 w-auto sm:h-11" onerror="this.style.display='none'">
+      </a>
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Principal">
+        <a class="nav-link active" href="nosotros.html" aria-current="page">Nosotros</a>
+        <a class="nav-link" href="index.html#proyecto">El proyecto</a>
+        <a class="nav-link" href="index.html#amenidades">Accesorios</a>
+        <a class="nav-link" href="index.html#modelos">Modelos</a>
+        <a class="nav-link" href="index.html#obras">Diseño de piscinas</a>
+        <a class="nav-link" href="index.html#contacto">Contacto</a>
+      </nav>
+      <a href="index.html" class="hidden rounded-full border border-teal-deep/35 px-4 py-2 text-sm font-semibold text-teal-deep transition hover:bg-teal-deep/5 sm:inline-flex">Volver al inicio</a>
+      <button id="burger" class="p-2 text-teal-deep lg:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="drawer"><i data-lucide="menu" class="h-6 w-6"></i></button>
+    </div>
+    <div id="drawer" class="hidden border-t border-night-900/10 bg-sand-50 lg:hidden">
+      <nav class="flex flex-col gap-4 px-6 py-5" aria-label="Menú móvil">
+        <a class="font-semibold text-teal-deep" href="nosotros.html" aria-current="page">Nosotros</a>
+        <a class="text-night-700" href="index.html#proyecto">El proyecto</a>
+        <a class="text-night-700" href="index.html#amenidades">Accesorios</a>
+        <a class="text-night-700" href="index.html#modelos">Modelos</a>
+        <a class="text-night-700" href="index.html#obras">Diseño de piscinas</a>
+        <a class="text-night-700" href="index.html#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="nosotros-hero px-5 pb-16 pt-36 sm:px-8 sm:pb-24 sm:pt-44">
+      <img class="hero-poster" src="./images/costapalmerafrente.jpg" alt="Frente de las oficinas de Costa Palmeras" fetchpriority="high">
+      <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="./images/costapalmerafrente.jpg" aria-hidden="true" tabindex="-1">
+        <source src="./images/Piscina%20de%20ensue%C3%B1o%20%E2%98%81%EF%B8%8F%F0%9F%8C%B4Est%C3%A1%20piscina%20con%20revestimiento%20travertino%20nos%20tiene%20facinados%20%F0%9F%A4%A9Piscina%20d.mp4" type="video/mp4">
+      </video>
+      <img class="hero-corner-logo" src="./images/logo_costa_palmeras_512.png" alt="Logo de Costa Palmeras">
+      <div class="mx-auto w-full max-w-7xl">
+        <h1 class="mt-4 max-w-4xl text-5xl font-semibold leading-[1.02] text-white sm:text-7xl">Personas que construyen<br class="hidden sm:block"> proyectos con propósito</h1>
+        <p class="mt-7 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">Somos un equipo altamente colaborador y solidario, que se une en cada proyecto para garantizar que nuestros clientes obtengan el mejor resultado.</p>
+        <a class="mt-7 inline-flex items-center gap-2 rounded-full border border-white/70 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10" href="#equipo">Conocé al equipo <i data-lucide="arrow-down" class="h-4 w-4"></i></a>
+      </div>
+    </section>
+
+    <section class="mv-section py-16 sm:py-20" aria-label="Misión, visión y valores">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+        <div class="mv-grid">
+          <article class="mv-item">
+            <span class="mv-icon" aria-hidden="true"><i data-lucide="target" class="h-5 w-5"></i></span>
+            <div class="mv-copy">
+              <div class="mv-heading"><span class="mv-index" aria-hidden="true">01</span><h2>Nuestra misión</h2></div>
+              <p>Diseñar y construir proyectos personalizados con la más alta calidad, adaptados a las necesidades de cada cliente. Buscamos mejorar constantemente, ofreciendo soluciones seguras, duraderas y un servicio cercano.</p>
+            </div>
+          </article>
+          <article class="mv-item">
+            <span class="mv-icon" aria-hidden="true"><i data-lucide="eye" class="h-5 w-5"></i></span>
+            <div class="mv-copy">
+              <div class="mv-heading"><span class="mv-index" aria-hidden="true">02</span><h2>Nuestra visión</h2></div>
+              <p>Ser una empresa líder en la construcción, reconocida por realizar proyectos innovadores y sostenibles, que mejoren la calidad de vida de nuestros clientes y contribuyan al desarrollo de las comunidades donde trabajamos.</p>
+            </div>
+          </article>
+        </div>
+        <article class="mv-item mv-values">
+          <span class="mv-icon" aria-hidden="true"><i data-lucide="handshake" class="h-5 w-5"></i></span>
+          <div class="mv-copy">
+            <div class="mv-heading"><span class="mv-index" aria-hidden="true">03</span><h2>Nuestros valores</h2></div>
+            <ul class="mv-values-list" aria-label="Valores de Costa Palmeras">
+              <li>Familia</li><li aria-hidden="true">/</li><li>Lealtad</li><li aria-hidden="true">/</li><li>Compromiso</li><li aria-hidden="true">/</li><li>Respeto</li><li aria-hidden="true">/</li><li>Superación</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mv-section py-20 sm:py-28" id="historia">
+      <div class="mx-auto grid max-w-7xl items-start gap-12 px-5 sm:px-8 lg:grid-cols-[1.1fr_.9fr] lg:gap-20">
+        <div>
+          <p class="text-sm font-semibold uppercase text-teal-deep">Desde 1993</p>
+          <h2 class="mt-3 text-5xl font-semibold leading-tight sm:text-6xl">Somos Costa Palmeras</h2>
+          <div class="mt-7 space-y-5 leading-relaxed text-night-700/85">
+            <p>Costa Palmeras es una empresa fundada por Rodolfo Rimaulo. Sus inicios fueron como empresa constructora de piscinas y actividades afines. Entre 1993 y 2007 desarrolló su actividad en Haedo, Provincia de Buenos Aires. En 2008 comenzó su expansión al interior de la provincia y eligió Rojas como base operativa.</p>
+            <p>En 2013 comenzó a incursionar en la construcción de viviendas y emprendimientos. A partir de 2021, la empresa inició otro ciclo de crecimiento: formó un área de servicios para atender la posventa de piscinas y construcción, y un área de premoldeados dedicada a fabricar piezas para clientes internos y externos.</p>
+            <p>Este crecimiento generó nuevos puestos de trabajo y oportunidades. El equipo pasó de 7 personas en 2007 a 50 en 2023. Hoy contamos con oficina central y depósito en Rojas, además de una oficina comercial en Pergamino. Trabajamos en el norte de la provincia de Buenos Aires y el sur de provincias limítrofes, con el objetivo de seguir expandiéndonos y creciendo día a día.</p>
+          </div>
+          <div class="mt-8 flex items-center gap-4 border-t border-teal-deep/20 pt-5">
+            <span class="grid h-11 w-11 place-items-center rounded-full bg-night-900 text-sm font-semibold text-gold-soft">CP</span>
+            <div><p class="font-semibold">Una empresa familiar</p><p class="text-sm text-night-700/70">Experiencia, trabajo y crecimiento compartido</p></div>
+          </div>
+        </div>
+        <figure class="lg:pt-12">
+          <div class="overflow-hidden rounded-2xl shadow-xl">
+            <img src="./images/imagenpabloHD.jpg" alt="Pablo Rimaulo, director de Costa Palmeras" class="aspect-[4/5] w-full object-cover object-top" onerror="this.onerror=null;this.src='./images/imagenpablo.jpg'">
+          </div>
+          <figcaption class="mt-4 flex items-center justify-between gap-4 text-sm">
+            <span class="font-semibold text-night-900">Pablo Rimaulo <span class="font-normal text-night-700/70">· Director</span></span>
+            <span class="h-px flex-1 bg-teal-deep/20"></span>
+            <span class="text-teal-deep">Rojas, Buenos Aires</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="mv-section py-20 sm:py-24" id="equipo">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="mb-12 flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <p class="text-sm font-semibold uppercase text-teal-deep">Las personas detrás de cada proyecto</p>
+            <h2 class="mt-3 text-5xl font-semibold sm:text-6xl">Nuestro equipo</h2>
+          </div>
+          <p class="max-w-md leading-relaxed text-night-700/75">Áreas que trabajan en conjunto para acompañar cada etapa, desde la primera consulta hasta la entrega.</p>
+        </div>
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="text-center">
+            <div class="team-avatar mx-auto grid aspect-square w-40 place-items-center rounded-full text-4xl font-semibold text-teal-deep">VR</div>
+            <h3 class="mt-5 text-2xl font-semibold">Victorio Roggia</h3>
+            <p class="mt-1 text-sm font-medium text-teal-deep">Área comercial</p>
+          </article>
+          <article class="text-center">
+            <div class="team-avatar mx-auto grid aspect-square w-40 place-items-center rounded-full text-4xl font-semibold text-teal-deep">DO</div>
+            <h3 class="mt-5 text-2xl font-semibold">Daniela Olmedo Bargo</h3>
+            <p class="mt-1 text-sm font-medium text-teal-deep">Comunicación</p>
+          </article>
+          <article class="text-center">
+            <div class="team-avatar mx-auto grid aspect-square w-40 place-items-center rounded-full text-4xl font-semibold text-teal-deep">NM</div>
+            <h3 class="mt-5 text-2xl font-semibold">Nicomedez Martinez</h3>
+            <p class="mt-1 text-sm font-medium text-teal-deep">Área de producción</p>
+          </article>
+          <article class="text-center">
+            <div class="team-avatar mx-auto grid aspect-square w-40 place-items-center rounded-full text-4xl font-semibold text-teal-deep">CM</div>
+            <h3 class="mt-5 text-2xl font-semibold">Carolina Moreno Guerrero</h3>
+            <p class="mt-1 text-sm font-medium text-teal-deep">Administración / RR. HH.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mv-section px-5 py-16 text-center sm:px-8 sm:py-20">
+      <h2 class="text-4xl font-semibold sm:text-5xl">¿Pensamos tu próximo proyecto?</h2>
+      <a class="btn-gold mt-6" href="index.html#contacto"><i data-lucide="message-circle" class="h-5 w-5"></i> Hablemos de tu piscina</a>
+    </section>
+  </main>
+
+  <footer class="bg-night-900 py-8 text-white/75">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 text-sm sm:px-8">
+      <a href="index.html#inicio" class="font-semibold text-white">Costa Palmeras</a>
+      <p>&copy; 2026 Costa Palmeras · Rojas, Buenos Aires</p>
+      <a href="index.html#contacto" class="transition hover:text-gold-soft">Contacto</a>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      if (window.lucide) lucide.createIcons();
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+      var heroVideo = document.getElementById('heroVideo');
+      if (heroVideo && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroVideo.removeAttribute('autoplay');
+        heroVideo.pause();
+      }
+      burger.addEventListener('click', function () {
+        var expanded = burger.getAttribute('aria-expanded') === 'true';
+        burger.setAttribute('aria-expanded', String(!expanded));
+        drawer.classList.toggle('hidden', expanded);
+      });
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          drawer.classList.add('hidden');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

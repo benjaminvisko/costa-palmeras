@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi obra | Costa Palmeras</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g: #0d6efd;
+  --g-primary: #0b5c39;
+  --g-primary-hover: #08472c;
+  --g-light: #f0f7f3;
+  --g-accent: #2e7d32;
+  --ink: #1a231f;
+  --mu: #5a6e65;
+  --ln: #e2e8e5;
+  --bg: #f8faf9;
+  --card: #ffffff;
+  --or: #d97706;
+  --wa: #fffbebf8;
+  --border-radius: 12px;
+  box-sizing: border-box;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-padding-top: 90px; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; color: var(--ink); font-weight: 600; }
+a { color: var(--g-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header & Nav */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid var(--ln);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+.hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  max-width: 1140px;
+  margin: auto;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 700 20px 'Montserrat', sans-serif;
+  color: var(--g-primary);
+  text-decoration: none !important;
+}
+.logo img { display: block; height: 36px; width: auto; }
+nav { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+nav a {
+  text-decoration: none !important;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--mu);
+  transition: all 0.2s ease;
+}
+nav a:hover, nav a.on { color: var(--g-primary); background: var(--g-light); font-weight: 600; }
+nav a[data-go="mi-obra"] { background: var(--g-primary); color: #fff; font-weight: 600; }
+nav a[data-go="mi-obra"]:hover { background: var(--g-primary-hover); color: #fff; }
+
+/* Pages */
+.page { display: none; background: #fff; }
+.page.on { display: block; animation: fadeIn 0.25s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: var(--g-primary);
+  color: #ffffff !important;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+  text-align: center;
+}
+.btn:hover { background: var(--g-primary-hover); }
+.btn.sm { padding: 8px 16px; border-radius: 6px; font-size: 13px; }
+.btn.ghost { background: transparent; color: var(--ink) !important; border: 1px solid var(--ln); }
+.btn.ghost:hover { background: var(--g-light); border-color: var(--ln); }
+
+/* App Portal */
+.app { max-width: 1140px; margin: auto; padding: 40px 24px 60px; background: var(--bg); }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; position: relative; flex-wrap: wrap; }
+.tabs { display: flex; background: #e6ede9; padding: 4px; border-radius: 8px; }
+.tabs button { border: 0; background: transparent; padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: 13px; color: var(--mu); }
+.tabs button.on { background: var(--card); color: var(--g-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.bell { position: relative; border: 1px solid var(--ln); background: var(--card); border-radius: 8px; padding: 8px 12px; }
+.dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #dc2626; right: 6px; top: 6px; }
+.np { position: absolute; right: 0; top: 48px; width: 320px; max-width: calc(100vw - 40px); background: var(--card); border: 1px solid var(--ln); border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,0.1); padding: 16px; z-index: 15; display: none; }
+.np.on { display: block; }
+.ni { padding: 10px; border-radius: 8px; font-size: 13px; background: var(--bg); margin-top: 8px; border: 1px solid var(--ln); }
+.ni.u { background: var(--g-light); font-weight: 600; border-color: #cce5d7; }
+.ni small { display: block; color: var(--mu); font-weight: 400; margin-top: 2px; }
+
+.ch { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.ch h2 { font-size: 18px; color: var(--ink); }
+.sub { font-size: 13px; color: var(--mu); }
+
+.pill { font-size: 12px; font-weight: 600; border-radius: 20px; padding: 4px 12px; background: var(--g-light); color: var(--g-primary); white-space: nowrap; }
+.pill.pending { background: #fef3c7; color: #92400e; }
+.pill.upcoming { background: #f3f4f6; color: #4b5563; }
+
+.bar { height: 10px; background: var(--ln); border-radius: 20px; overflow: hidden; margin: 12px 0 16px; }
+.bar span { display: block; height: 100%; background: var(--g-primary); transition: width .4s ease; }
+.stages { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.stage { font-size: 12px; color: var(--mu); text-align: center; }
+.stage:before { content: ""; display: block; width: 12px; height: 12px; border-radius: 50%; background: var(--ln); margin: 0 auto 6px; }
+.stage.done { color: var(--g-primary); font-weight: 600; }
+.stage.done:before { background: var(--g-primary); }
+.stage.cur { color: var(--g-primary); font-weight: 700; }
+.stage.cur:before { background: #fff; border: 3px solid var(--g-primary); }
+
+.week { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
+.day { border: 1px solid var(--ln); background: var(--card); border-radius: 10px; padding: 12px 8px; min-height: 100px; text-align: left; }
+.day:hover { border-color: var(--g-primary); }
+.day.sel { border: 2px solid var(--g-primary); background: var(--g-light); }
+.day b { font-size: 11px; color: var(--mu); text-transform: uppercase; display: block; }
+.day .n { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+.ev { font-size: 11px; line-height: 1.3; background: #e8f4ec; color: var(--g-primary); padding: 4px 6px; border-radius: 4px; font-weight: 600; margin-bottom: 4px; }
+.day.sel .ev { background: #ffffff; }
+.ev.o { background: #fef3c7; color: #92400e; }
+
+.task { display: grid; grid-template-columns: 60px 1fr auto; gap: 16px; align-items: center; padding: 14px 0; border-top: 1px solid var(--ln); }
+.task:first-child { border-top: 0; padding-top: 0; }
+.tm { font-size: 12px; font-weight: 700; color: var(--g-primary); background: var(--g-light); border-radius: 6px; padding: 6px 4px; text-align: center; }
+.task h4 { margin: 0; font-size: 15px; }
+.task p { margin: 2px 0 0; font-size: 13px; color: var(--mu); }
+
+.tools { display: none; gap: 12px; flex-wrap: wrap; margin-top: 16px; padding: 16px; background: var(--bg); border: 1px solid var(--ln); border-radius: 8px; align-items: flex-end; }
+.tools.on { display: flex; }
+.tools label { font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--ink); }
+.tools select, .tools input[type=time], .tools input[type=text] { padding: 8px 12px; border: 1px solid var(--ln); border-radius: 6px; background: #fff; font-size: 13px; }
+
+.msg { background: var(--bg); border: 1px solid var(--ln); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; font-size: 14px; }
+.msg b { display: block; font-size: 13px; color: var(--g-primary); margin-bottom: 2px; }
+.msg small { color: var(--mu); font-size: 11px; }
+
+.mi { display: flex; gap: 10px; margin-top: 14px; }
+.mi input { flex: 1; min-width: 0; padding: 10px 14px; border: 1px solid var(--ln); border-radius: 8px; background: #fff; font-size: 14px; }
+.mi input:focus { outline: 2px solid var(--g-primary); border-color: transparent; }
+
+.notice { background: var(--wa); border: 1px solid #fde68a; border-radius: 8px; padding: 14px; font-size: 13px; color: #78350f; line-height: 1.5; }
+.row { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--ln); font-size: 14px; }
+.row:first-of-type { border-top: 0; }
+.row span { display: block; font-size: 12px; color: var(--mu); }
+.av { width: 40px; height: 40px; border-radius: 50%; background: var(--g-light); color: var(--g-primary); display: grid; place-items: center; font-weight: 700; font-size: 14px; flex-shrink: 0; border: 1px solid var(--ln); }
+
+/* Forms & Auth */
+.auth { display: block; max-width: 420px; margin: 60px auto; padding: 40px; border: 1px solid var(--ln); border-radius: var(--border-radius); background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+.auth h1 { font-size: 24px; color: var(--g-primary); margin-bottom: 4px; }
+.auth label { display: block; font-size: 13px; font-weight: 600; margin: 16px 0 6px; color: var(--ink); }
+.auth input, .auth select { width: 100%; padding: 10px 14px; border: 1px solid var(--ln); border-radius: 6px; background: #ffffff; font-size: 14px; }
+.auth input:focus, .auth select:focus { outline: 2px solid var(--g-primary); border-color: transparent; }
+.auth .btn { width: 100%; margin-top: 20px; border: 0; }
+.err { color: #dc2626; font-size: 13px; min-height: 20px; margin-top: 10px; font-weight: 500; }
+
+.toast { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom,0px)); left: 50%; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: #18221c; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 14px; transition: all .25s ease; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.toast.on { opacity: 1; transform: translate(-50%,0); }
+
+footer { background: #ffffff; color: var(--mu); text-align: center; padding: 32px 24px; font-size: 13px; border-top: 1px solid var(--ln); margin-top: 40px; }
+
+/* ===== TEMA VERDE OSCURO + DORADO (glass) — SIN CAMBIOS ===== */
+:root{--g-primary:#fbbf24;--g-primary-hover:#f59e0b;--g-light:rgba(255,255,255,.08);--g-accent:#fbbf24;--ink:#f5f2e9;--mu:#c3d0c8;--ln:rgba(255,255,255,.18);--bg:#1b3a2c;--card:rgba(255,255,255,.09);--or:#fbbf24;--wa:rgba(251,191,36,.12);--border-radius:24px}
+body{background:linear-gradient(160deg,#16322a 0%,#2f4f3f 35%,#5f7769 62%,#2a4a3a 82%,#14291f 100%) fixed;color:var(--ink);font-family:'Inter',-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+a{color:#ffd37f}
+header{background:rgba(27,58,44,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1);box-shadow:none}
+.logo{color:#fff;font-family:'Inter',sans-serif;font-weight:700}
+nav a{color:#e8efe9}
+nav a:hover,nav a.on{color:#ffd37f;background:rgba(255,255,255,.08)}
+nav a[data-go="mi-obra"]{background:transparent;color:#e8efe9}
+nav a[data-go="mi-obra"]:hover{background:rgba(255,255,255,.08);color:#ffd37f}
+nav a#nl1,nav a#out{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:10px 22px;color:#fff}
+.page,.app{background:transparent}
+.auth,.np{background:rgba(255,255,255,.09);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.ch h2{font-size:24px}
+.auth h1{font-size:36px;color:#fff}
+.sub{color:var(--mu)}
+.btn{background:linear-gradient(135deg,#ffd37f,#fbb724);color:#14281f!important;border-radius:999px;box-shadow:0 8px 24px rgba(251,191,36,.28)}
+.btn:hover{background:linear-gradient(135deg,#ffe0a0,#fcc13a);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:#f5f2e9!important;border:1px solid rgba(255,255,255,.4);box-shadow:none}
+.btn.ghost:hover{background:rgba(255,255,255,.1);transform:none}
+option{background:#1b3a2c;color:#fff}
+.tabs{background:rgba(255,255,255,.1);border-radius:999px}
+.tabs button{color:#dfe8e2;border-radius:999px}
+.tabs button.on{background:#fbbf24;color:#14281f;box-shadow:none}
+.bell{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);border-radius:999px}
+.dot{background:#ff6b5b}
+.np{background:rgba(27,58,44,.97)}
+.ni{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.ni.u{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.4)}
+.pill{background:rgba(251,191,36,.15);color:#ffd37f;border:1px solid rgba(251,191,36,.45)}
+.pill.pending{background:rgba(251,191,36,.25);color:#ffe3a0}
+.pill.upcoming{background:rgba(255,255,255,.1);color:#d5e0d9;border-color:rgba(255,255,255,.2)}
+.bar{background:rgba(255,255,255,.15)}
+.bar span{background:linear-gradient(90deg,#ffd37f,#fbb724)}
+.stage:before{background:rgba(255,255,255,.25)}
+.stage.done,.stage.cur{color:#ffd37f}
+.stage.done:before{background:#fbbf24}
+.stage.cur:before{background:#1b3a2c;border-color:#fbbf24}
+.day{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);color:var(--ink);border-radius:16px}
+.day:hover{border-color:#fbbf24}
+.day.sel{background:rgba(251,191,36,.14);border:2px solid #fbbf24}
+.day .n{color:#fff}
+.ev{background:rgba(255,255,255,.12);color:#e9f1ec}
+.day.sel .ev{background:rgba(255,255,255,.16)}
+.ev.o{background:rgba(251,191,36,.25);color:#ffe3a0}
+.tm{background:rgba(251,191,36,.15);color:#ffd37f}
+.tools{background:rgba(0,0,0,.18);border-color:rgba(255,255,255,.18);border-radius:16px}
+.tools select,.tools input,.mi input,.auth input,.auth select,#nm{background:rgba(255,255,255,.1)!important;border:1px solid rgba(255,255,255,.28)!important;color:#fff;border-radius:14px}
+::placeholder{color:#b7c6bd}
+.mi input:focus,.auth input:focus,.auth select:focus{outline:2px solid #fbbf24}
+.msg{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);border-radius:14px}
+.msg b{color:#ffd37f}
+.notice{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35);color:#ffe9b8;border-radius:14px}
+.av{background:rgba(255,255,255,.12);color:#ffd37f;border-color:rgba(255,255,255,.25)}
+.top .av{background:linear-gradient(135deg,#ffd37f,#fbb724)!important;color:#14281f!important}
+.err{color:#ff9d92}
+.toast{background:#fbbf24;color:#14281f}
+footer{background:rgba(10,24,17,.55);color:#c3d0c8;border-top:1px solid rgba(255,255,255,.1)}
+#vbg{position:fixed;inset:0;z-index:0;width:100%;height:100vh;overflow:hidden;pointer-events:none;background:#071b2d}
+#vbg video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.04) brightness(.82)}
+#vbg .tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,34,62,.58),rgba(9,58,92,.3) 45%,rgba(7,34,62,.7)),linear-gradient(90deg,rgba(7,34,62,.42),transparent 76%)}
+header,.page,footer{position:relative;z-index:1}
+body{position:relative}
+
+/* ===== NUEVO LAYOUT "VENTANAS" (según PDF de referencia) ===== */
+
+/* Header: hamburguesa a la izquierda, links a la derecha */
+.hd{position:relative;justify-content:flex-start;max-width:1280px}
+.app{max-width:1280px;padding:48px 32px 80px}
+.top{margin-bottom:36px}
+.hd nav{margin-left:auto}
+.burger{display:none;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0}
+.burger:hover{background:rgba(255,255,255,.14)}
+.burger span{display:block;width:22px;height:3px;border-radius:2px;background:#fff}
+.menu{display:none;position:absolute;top:calc(100% + 6px);left:24px;min-width:230px;padding:10px;border-radius:20px;background:rgba(27,58,44,.97);border:1px solid rgba(255,255,255,.2);box-shadow:0 20px 50px rgba(0,0,0,.35);z-index:120}
+.menu.on{display:block}
+.menu button{display:block;width:100%;text-align:left;background:transparent;border:0;color:#e8efe9;padding:11px 16px;border-radius:12px;font-weight:500;font-size:14px}
+.menu button:hover{background:rgba(255,255,255,.08);color:#ffd37f}
+
+/* Saludo + notificaciones */
+.top h1{font-size:34px;line-height:1.1}
+.top .sub{margin-top:2px}
+
+/* Componente ventana */
+.win{position:relative;background:rgba(255,255,255,.09);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);border-radius:26px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.win-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:52px;padding:0 28px;background:rgba(251,191,36,.2);border-bottom:1px solid rgba(251,191,36,.38);border-radius:25px 25px 0 0;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#ffe3a0}
+.win-body{padding:28px 30px}
+
+.lbl{font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#ffd37f;margin-bottom:10px}
+.val{font-size:20px;font-style:italic;font-weight:500;color:#ffe9b8}
+
+/* Grilla principal */
+.hero-grid{display:grid;grid-template-columns:290px minmax(0,1fr) 330px;gap:32px;align-items:stretch;margin-bottom:40px}
+.col{display:flex;flex-direction:column;gap:32px;min-width:0}
+.col>.win:last-child{flex:1}
+.title-block{container-type:inline-size;min-width:0}
+#w-prog,#w-info,#w-contact{display:flex;flex-direction:column}
+#w-prog .win-body,#w-info .win-body,#w-contact .win-body{flex:1;display:flex;flex-direction:column}
+#w-contact .win-body{justify-content:center}
+.owner-wrap{margin-top:auto;padding-top:30px}
+.contact-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+.photo-win{overflow:hidden}
+.photo{aspect-ratio:1/.9;background:rgba(0,0,0,.2)}
+.photo img{display:block;width:100%;height:100%;object-fit:cover}
+.photo.noimg{display:grid;place-items:center;background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(255,255,255,.08))}
+.photo.noimg:after{content:"🏊";font-size:56px}
+
+.line-title{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(40px,5.2vw,80px);font-size:clamp(40px,16cqi,92px);line-height:.92;letter-spacing:-.5px;text-transform:uppercase;color:#ffd37f;overflow-wrap:anywhere}
+.client-name{margin-top:24px;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#ffd37f}
+
+.seg-wrap{display:none;align-items:center;gap:12px;flex-wrap:wrap;margin-top:24px}
+.seg-wrap.on{display:flex}
+.seg-l{font-size:12px;font-weight:600;color:var(--mu)}
+.seg{display:flex;background:rgba(255,255,255,.1);border-radius:999px;padding:4px}
+.seg button{border:0;background:transparent;color:#dfe8e2;padding:8px 18px;border-radius:999px;font-weight:600;font-size:13px}
+.seg button.on{background:#fbbf24;color:#14281f}
+
+/* Línea de tiempo (3+ puntos conectados) */
+.tl{position:relative;margin:36px 6px 12px}
+.tl-track{position:absolute;left:12.5%;right:12.5%;top:10px;height:5px;border-radius:5px;background:rgba(255,255,255,.18)}
+.tl-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:5px;background:linear-gradient(90deg,#ffd37f,#fbb724);transition:width .4s ease}
+.tl .stages{position:relative;gap:4px}
+.tl .stage{font-size:13px}
+.tl .stage:before{width:25px;height:25px;margin:0 auto 10px;position:relative;z-index:1;background:#3f5d4d;border:3px solid rgba(255,255,255,.22)}
+.tl .stage.done:before{background:#fbbf24;border-color:#fbbf24}
+.tl .stage.cur:before{background:#1b3a2c;border-color:#fbbf24}
+
+.owner{text-align:center;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#ffd37f}
+.owner-pill{display:block;width:fit-content;max-width:100%;margin:14px auto 0;padding:13px 34px;border-radius:999px;background:linear-gradient(135deg,#ffd37f,#fbb724);color:#14281f;font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px rgba(251,191,36,.28)}
+
+/* Productos / mantenimiento / contacto */
+.plist,.mlist{list-style:none;margin-bottom:22px;font-size:16px;font-style:italic;color:#ffe9b8;line-height:1.8}
+.mlist{font-size:14px;margin-bottom:20px}
+#w-prod .btn{padding:13px 34px;font-size:15px}
+.tel{display:block;font-size:22px;font-style:italic;font-weight:500;color:#ffe9b8}
+
+/* Secciones inferiores */
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px;margin-top:32px;align-items:stretch}
+#w-serv{display:flex;flex-direction:column}
+#w-serv .win-body{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+#w-serv h2{font-size:30px}
+#w-tasks h2{font-size:26px}
+
+/* Responsive */
+@media(max-width:1000px){
+  .hero-grid{grid-template-columns:1fr 1fr}
+  .hero-grid>.col:nth-child(2){grid-column:1/-1;order:-1}
+  .two{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .app{padding:28px 16px 48px}
+  .hd{padding:12px 16px;gap:10px}
+  .logo img{height:28px}
+  .menu{left:16px}
+  nav a{padding:8px 12px}
+  nav a#nl1,nav a#out{padding:8px 14px}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  .col{gap:24px}
+  .week{gap:6px}
+  .day{padding:8px 4px}
+  .ev{font-size:10px}
+  .top h1{font-size:28px}
+  .task{grid-template-columns:54px 1fr}
+  .task .pill{grid-column:2;justify-self:start}
+}
+@media(prefers-reduced-motion:reduce){.page.on{animation:none}.tl-fill,.bar span{transition:none}}
+</style>
+</head>
+<body>
+<div id="vbg" aria-hidden="true">
+  <video src="./images/portadaweb.mp4" poster="images/28.jpg" autoplay muted loop playsinline preload="auto" tabindex="-1"></video>
+  <div class="tint"></div>
+</div>
+
+<header>
+  <div class="hd">
+    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+    <a class="logo" href="index.html" aria-label="Costa Palmeras">
+      <img src="images/cropped-logo-horizontal-350x66.png" alt="Costa Palmeras" />
+    </a>
+    <nav>
+      <a href="#/mi-obra" data-go="mi-obra">Mi obra</a>
+      <a href="#/login" data-go="login" id="nl1">Ingresar</a>
+      <a href="#/registro" data-go="registro" id="nl2">Crear cuenta</a>
+      <a href="#" id="out" style="display:none">Salir</a>
+    </nav>
+    <div class="menu" id="menu">
+      <button data-sc="top">Resumen de mi obra</button>
+      <button data-sc="w-cal">Calendario</button>
+      <button data-sc="w-tasks">Agenda del día</button>
+      <button data-sc="w-serv">Ver servicios</button>
+      <button data-sc="w-prod">Productos y mantenimiento</button>
+    </div>
+  </div>
+</header>
+
+<main class="page" data-p="mi-obra">
+  <div class="app">
+    <div class="top">
+      <div style="display:flex;gap:14px;align-items:center">
+        <div class="av" id="avt"></div>
+        <div>
+          <h1 id="hi">Hola 👋</h1>
+          <p class="sub" id="hp">Este es el avance de tu piscina. Te mantenemos al tanto en cada etapa.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <select id="cl" class="btn sm ghost" style="display:none" aria-label="Cliente"></select>
+        <div class="tabs" id="tabs"><button class="on" id="tc">Cliente</button><button id="ts">Equipo</button></div>
+        <button class="bell" id="bell" aria-label="Notificaciones">🔔<i class="dot" id="dot"></i></button>
+        <div class="np" id="np"><b style="font-size:13px; color:var(--ink);">Notificaciones</b><div id="nl"></div></div>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <!-- Columna izquierda -->
+      <div class="col">
+        <section class="win photo-win">
+          <div class="win-bar"><span>Mi piscina</span></div>
+          <div class="photo"><img id="ph" alt="Tu piscina" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"></div>
+        </section>
+        <section class="win" id="w-info">
+          <div class="win-bar"><span>Tu obra</span></div>
+          <div class="win-body">
+            <div class="lbl">Número del cliente:</div>
+            <div class="val" id="cc">—</div>
+            <div class="notice" style="margin-top:24px">
+              ☀️ <b>Clima y planificación</b><br>
+              Los trabajos exteriores pueden reprogramarse por condiciones climáticas. Si cambian los horarios se notificará automáticamente.
+            </div>
+            <button class="btn sm ghost" id="bn" style="width:100%;margin-top:14px">Activar avisos del navegador</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Centro: título + avance -->
+      <div class="col">
+        <div class="title-block">
+          <h1 class="line-title" id="ttl">Línea<br>Mirabilis</h1>
+          <div class="client-name" id="cn"></div>
+          <div class="seg-wrap" id="segw">
+            <span class="seg-l">Línea de esta obra</span>
+            <div class="seg" id="seg">
+              <button data-line="mirabilis">Línea Mirabilis</button>
+              <button data-line="bacoli">Línea Bacoli</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="win" id="w-prog">
+          <div class="win-bar"><span>Avance de tu obra</span></div>
+          <div class="win-body">
+            <div class="ch" style="margin-bottom:0">
+              <div class="sub" id="pinfo">Obra sin iniciar</div>
+              <span class="pill" id="st">Sin iniciar</span>
+            </div>
+
+            <div class="tl">
+              <div class="tl-track"><i class="tl-fill" id="tlf"></i></div>
+              <div class="stages" id="sg"></div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:18px"><span>Avance general</span><b style="color:var(--g-primary)" id="pt">0% completado</b></div>
+            <div class="bar"><span id="pb" style="width:0%"></span></div>
+            <div class="notice" id="empty" style="display:none;margin-top:8px">Tu obra todavía no tiene novedades. Apenas el equipo de Costa Palmeras cargue el avance o las actividades, las vas a ver acá.</div>
+
+            <div class="tools" id="tl1">
+              <div>
+                <label>Estado</label>
+                <select id="ns">
+                  <option>Sin iniciar</option>
+                  <option>En ejecución</option>
+                  <option>En pausa por clima</option>
+                  <option>Etapa completada</option>
+                  <option>Requiere coordinación</option>
+                </select>
+              </div>
+              <div>
+                <label>Avance: <span id="pv">0</span>%</label>
+                <input type="range" id="np2" min="0" max="100" value="0">
+              </div>
+              <div>
+                <label>Encargado de la actividad</label>
+                <input id="no" placeholder="Ej: Pablo Martin">
+              </div>
+              <div>
+                <label>Aviso al cliente</label>
+                <input id="nm" placeholder="Opcional">
+              </div>
+              <button class="btn sm" id="sv">Guardar avance</button>
+            </div>
+
+            <div class="owner-wrap">
+              <div class="owner">Encargado de la actividad:</div>
+              <div class="owner-pill" id="ow">Personal a definir</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Derecha: productos / mantenimiento y contacto -->
+      <div class="col">
+        <section class="win" id="w-prod">
+          <div class="win-bar"><span>Tu línea</span></div>
+          <div class="win-body">
+            <div class="lbl">Productos:</div>
+            <ul class="plist" id="pl"></ul>
+            <a class="btn" id="more" href="servicios.html">SABER MÁS</a>
+
+            <div class="lbl" style="margin-top:34px">Mantenimiento:</div>
+            <ul class="mlist">
+              <li>Análisis de agua y puesta a punto</li>
+              <li>Servicio técnico postventa</li>
+              <li>Productos para piscina</li>
+            </ul>
+            <a class="btn" id="pdf" href="../PDF/Usos%20y%20mantenimientos.pdf" download="Usos_y_mantenimientos.pdf">DESCARGAR PDF</a>
+          </div>
+        </section>
+
+        <section class="win" id="w-contact">
+          <div class="win-bar"><span>Atención</span></div>
+          <div class="win-body">
+            <div class="lbl">Contacto:</div>
+            <div class="contact-row">
+              <a class="tel" href="tel:2474476600">2474476600</a>
+              <a class="btn sm ghost" href="tel:2474476600">☎ Llamar</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="win" id="w-cal">
+      <div class="win-bar"><span>Calendario de actividades</span></div>
+      <div class="win-body">
+        <div class="ch">
+          <div class="sub" id="cap"></div>
+          <select id="flt" class="btn sm ghost"><option>Todas las actividades</option><option>Obra</option><option>Visitas</option><option>Servicios</option></select>
+        </div>
+        <div class="week" id="wk"></div>
+      </div>
+    </section>
+
+    <div class="two">
+      <section class="win" id="w-tasks">
+        <div class="win-bar"><span>Agenda</span></div>
+        <div class="win-body">
+          <div class="ch"><div><h2 id="tt">Actividades de hoy</h2><div class="sub" id="ts2"></div></div></div>
+          <div id="tk"></div>
+
+          <div class="tools" id="tl2">
+            <div>
+              <label>Actividad</label>
+              <select id="na">
+                <option>Hormigonado</option>
+                <option>Excavación</option>
+                <option>Visita técnica</option>
+                <option>Control de agua</option>
+                <option>Terminaciones</option>
+              </select>
+            </div>
+            <div>
+              <label>Hora</label>
+              <input type="time" id="nh" value="09:00">
+            </div>
+            <button class="btn sm" id="ad">+ Asignar al día elegido</button>
+          </div>
+          <div class="sub" id="hint" style="margin-top:10px"></div>
+        </div>
+      </section>
+
+      <section class="win" id="w-serv">
+        <div class="win-bar"><span>Ver servicios</span></div>
+        <div class="win-body">
+          <h2>Ver servicios</h2>
+          <p class="sub" style="margin:8px 0 22px;font-size:14px;line-height:1.6">Mantenimiento, análisis de agua, servicio técnico y productos para que tu piscina esté siempre lista.</p>
+          <a class="btn" href="servicios.html">Ir a servicios</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<main class="page" data-p="login">
+  <form class="auth" id="fl">
+    <h1>Ingresar</h1>
+    <p class="sub">Accedé al seguimiento de tu obra.</p>
+
+    <label>Email</label>
+    <input name="email" type="email" placeholder="mariana@ejemplo.com" required autocomplete="email">
+
+    <label>Contraseña</label>
+    <input name="pw" type="password" required autocomplete="current-password">
+
+    <div class="err" id="le" role="alert"></div>
+    <button class="btn" type="submit">Ingresar</button>
+    <p class="sub" style="text-align:center;margin-top:20px">¿No tenés cuenta? <a href="#/registro">Crear cuenta</a></p>
+  </form>
+</main>
+
+<main class="page" data-p="registro">
+  <form class="auth" id="fr">
+    <h1>Crear cuenta</h1>
+    <p class="sub">Registrate para seguir tu piscina.</p>
+
+    <label>Nombre y apellido</label>
+    <input name="name" placeholder="Mariana López" required autocomplete="name">
+
+    <label>Email</label>
+    <input name="email" type="email" placeholder="mariana@ejemplo.com" required autocomplete="email">
+
+    <label>Tipo de cuenta</label>
+    <select name="role">
+      <option value="cliente">Cliente</option>
+      <option value="equipo">Equipo Costa Palmeras</option>
+    </select>
+
+    <label>Código de compra (opcional)</label>
+    <input name="code" placeholder="CP-0000">
+
+    <label>Contraseña (mínimo 8 caracteres)</label>
+    <input name="pw" type="password" required minlength="8" autocomplete="new-password">
+
+    <label>Repetir contraseña</label>
+    <input name="pw2" type="password" required autocomplete="new-password">
+
+    <div class="err" id="re" role="alert"></div>
+    <button class="btn" type="submit">Crear cuenta</button>
+    <p class="sub" style="text-align:center;margin-top:20px">¿Ya tenés cuenta? <a href="#/login">Ingresar</a></p>
+  </form>
+</main>
+
+<footer>© Costa Palmeras · Piscinas para toda la vida · Av. Guzmán s/n, Rojas, Buenos Aires</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const Q = s => document.querySelectorAll(s);
+
+const toast = t => {
+  const e = $('toast');
+  e.textContent = t;
+  e.classList.add('on');
+  setTimeout(() => e.classList.remove('on'), 2400);
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ===== Líneas de piscina (editá acá fotos, productos y PDFs) ===== */
+const LINES = {
+  mirabilis: {
+    name: 'Línea Mirabilis',
+    img: 'images/28.jpg',
+    products: ['Iluminación LED', 'Climatización', 'Filtrado y bombas', 'Cobertor automático'],
+    pdf: '../PDF/Usos%20y%20mantenimientos.pdf'
+  },
+  bacoli: {
+    name: 'Línea Bacoli',
+    img: 'images/28.jpg',
+    products: ['Iluminación LED', 'Climatización solar', 'Revestimientos', 'Hidromasaje'],
+    pdf: '../PDF/Usos%20y%20mantenimientos.pdf'
+  }
+};
+
+/* Navegación SPA */
+const P = ['mi-obra', 'login', 'registro'];
+
+function show(p) {
+  if (!P.includes(p)) p = 'mi-obra';
+  const u = cur();
+
+  if (p === 'mi-obra' && !u) {
+    p = 'login';
+    toast('Ingresá para ver tu obra');
+  }
+  if ((p === 'login' || p === 'registro') && u) {
+    p = 'mi-obra';
+  }
+
+  Q('.page').forEach(s => s.classList.toggle('on', s.dataset.p === p));
+  Q('nav a').forEach(a => a.classList.toggle('on', a.dataset.go === p));
+  window.scrollTo(0, 0);
+}
+
+function go(p) {
+  try { history.pushState(null, '', '#/' + p); } catch (e) {}
+  show(p);
+}
+
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#/"]');
+  if (a) {
+    e.preventDefault();
+    go(a.getAttribute('href').slice(2));
+  }
+});
+
+window.addEventListener('popstate', () => show((location.hash || '#/mi-obra').slice(2)));
+
+/* Menú hamburguesa */
+$('burger').onclick = e => { e.stopPropagation(); $('menu').classList.toggle('on'); };
+$('menu').onclick = e => {
+  const b = e.target.closest('button[data-sc]');
+  if (!b) return;
+  $('menu').classList.remove('on');
+  if (b.dataset.sc === 'top') return window.scrollTo({ top: 0, behavior: 'smooth' });
+  const t = $(b.dataset.sc);
+  if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+document.addEventListener('click', e => {
+  if (!e.target.closest('#menu')) $('menu').classList.remove('on');
+});
+
+/* Datos por cliente (vacíos hasta que el equipo los cargue) */
+const KEY = 'cp_obra_v2';
+const T = (time, name, detail, status, kind, cat) => ({ time, name, detail, status, kind, cat });
+const empty = () => ({ status: 'Sin iniciar', p: 0, days: {}, notifs: [], msgs: [], line: 'mirabilis', owner: '' });
+let DB = (() => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } })() || { projects: {} };
+let S = empty();
+let viewEmail = null;
+const save = () => {
+  if (viewEmail) DB.projects[viewEmail] = S;
+  try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {}
+};
+function openProject(em) {
+  viewEmail = em;
+  S = em ? (DB.projects[em] || (DB.projects[em] = empty())) : empty();
+  if (!S.days) S.days = {};
+  if (!S.line || !LINES[S.line]) S.line = 'mirabilis';
+  if (S.owner == null) S.owner = '';
+}
+const iso = d => d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+function dayList(i, mk) {
+  const k = iso(dates[i]);
+  if (mk && !S.days[k]) S.days[k] = [];
+  return S.days[k] || [];
+}
+const needClient = () => { if (viewEmail) return false; toast('Primero tiene que haber un cliente registrado'); return true; };
+
+/* Título de la línea, foto, productos, PDF y encargado */
+function renderLine() {
+  const L = LINES[S.line] || LINES.mirabilis;
+  const [a, ...b] = L.name.split(' ');
+  $('ttl').innerHTML = esc(a) + '<br>' + esc(b.join(' '));
+  const c = staff ? clients().find(x => x.email === viewEmail) : cur();
+  $('cn').textContent = c ? c.name : '';
+  $('pl').innerHTML = L.products.map(p => `<li>${esc(p)}</li>`).join('');
+  $('pdf').href = L.pdf;
+  const im = $('ph');
+  if (im.dataset.cur !== L.img) {
+    im.dataset.cur = L.img;
+    im.style.display = '';
+    im.parentNode.classList.remove('noimg');
+    im.src = L.img;
+  }
+  $('ow').textContent = S.owner || 'Personal a definir';
+  Q('#seg button').forEach(b => b.classList.toggle('on', b.dataset.line === S.line));
+}
+
+function renderAll() {
+  prog(); notif(); tasks(); renderLine();
+  $('ns').value = S.status;
+  $('no').value = S.owner || '';
+  const u = cur();
+  const c = staff ? clients().find(x => x.email === viewEmail) : u;
+  $('pinfo').textContent = c ? (c.code ? 'Obra ' + c.code : 'Obra sin código asignado') + (staff ? ' · ' + c.name : '') : '';
+  $('cc').textContent = c && c.code ? c.code : '—';
+  if (staff) $('hp').textContent = c ? 'Estás cargando el avance de ' + c.name + '. El cliente lo ve en su portal.' : 'Todavía no hay clientes registrados.';
+  $('empty').style.display = (!staff && S.p === 0 && !Object.values(S.days).some(a => a.length)) ? 'block' : 'none';
+}
+
+/* Selector de línea (solo equipo) */
+$('seg').onclick = e => {
+  const b = e.target.closest('button[data-line]');
+  if (!b) return;
+  if (needClient()) return;
+  S.line = b.dataset.line;
+  save();
+  renderLine();
+  toast('Obra asignada a ' + LINES[S.line].name);
+};
+
+/* Control Calendario */
+const NM = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const DN = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie'];
+const DL = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+
+const now = new Date();
+const wd = (now.getDay() + 6) % 7;
+const mon = new Date(now);
+mon.setDate(now.getDate() - wd + (wd > 4 ? 7 : 0));
+
+const dates = [0, 1, 2, 3, 4].map(i => {
+  const d = new Date(mon);
+  d.setDate(mon.getDate() + i);
+  return d;
+});
+
+let sel = wd > 4 ? 0 : wd;
+let staff = false;
+let flt = 'Todas las actividades';
+
+const ok = t => flt === 'Todas las actividades' || t.cat === flt;
+const byT = (a, b) => a.time.localeCompare(b.time);
+
+function week() {
+  const g = $('wk');
+  g.innerHTML = '';
+  dates.forEach((d, i) => {
+    const b = document.createElement('button');
+    b.className = 'day' + (i === sel ? ' sel' : '');
+    b.innerHTML = `<b>${DN[i]}</b><div class="n">${d.getDate()}</div>` +
+      dayList(i).filter(ok).sort(byT).map(t => `<div class="ev${t.cat === 'Visitas' ? ' o' : ''}">${t.time} · ${esc(t.name)}</div>`).join('');
+    b.onclick = () => { sel = i; tasks(); };
+    g.appendChild(b);
+  });
+  $('cap').textContent = `Semana del ${dates[0].getDate()} al ${dates[4].getDate()} de ${NM[dates[4].getMonth()]}`;
+}
+
+function tasks() {
+  const l = $('tk');
+  l.innerHTML = '';
+  const r = dayList(sel).filter(ok).sort(byT);
+  r.forEach(t => {
+    const d = document.createElement('div');
+    d.className = 'task';
+    d.innerHTML = `<div class="tm">${t.time}</div><div><h4>${esc(t.name)}</h4><p>${esc(t.detail)}</p></div><span class="pill ${t.kind}">${t.status}</span>`;
+    if (staff) {
+      d.style.cursor = 'pointer';
+      d.title = 'Tocá para marcar como completada';
+      d.onclick = () => {
+        if (needClient()) return;
+        const done = t.status !== 'Completada';
+        t.status = done ? 'Completada' : 'En curso';
+        t.kind = done ? '' : 'pending';
+        if (done) notify('Se completó: ' + t.name);
+        tasks();
+        toast('Avance actualizado para el cliente');
+      };
+    }
+    l.appendChild(d);
+  });
+  if (!r.length) l.innerHTML = '<div class="sub" style="padding:12px 0">No hay actividades para este día o filtro.</div>';
+  const d = dates[sel];
+  $('tt').textContent = staff ? 'Agenda del equipo' : (wd <= 4 && sel === wd ? 'Actividades de hoy' : `Actividades · ${DN[sel]} ${d.getDate()}`);
+  $('ts2').textContent = `${DL[sel]} ${d.getDate()} de ${NM[d.getMonth()]} · Horarios estimados`;
+  $('hint').textContent = staff ? 'Tocá una actividad para cambiar su estado.' : '';
+  week();
+  save();
+}
+
+function prog() {
+  const p = S.p;
+  const i = p >= 100 ? 4 : p <= 0 ? -1 : p < 25 ? 0 : p < 50 ? 1 : p < 75 ? 2 : 3;
+  $('st').textContent = S.status;
+  $('pt').textContent = p + '% completado';
+  $('pb').style.width = p + '%';
+  $('np2').value = p;
+  $('pv').textContent = p;
+  $('tlf').style.width = (i < 0 ? 0 : Math.min(i, 3) / 3 * 100) + '%';
+  $('sg').innerHTML = ['Replanteo', 'Excavación', 'Estructura', 'Terminaciones'].map((n, k) => `<div class="stage ${k < i ? 'done' : k === i ? 'cur' : ''}">${n}</div>`).join('');
+}
+
+/* Notificaciones */
+function notif() {
+  $('nl').innerHTML = S.notifs.map(n => `<div class="ni ${n.u ? 'u' : ''}">${esc(n.t)}<small>${n.time}</small></div>`).join('') || '<div class="sub">Sin notificaciones.</div>';
+  $('dot').style.display = S.notifs.some(n => n.u) ? 'block' : 'none';
+}
+
+function notify(t) {
+  S.notifs.unshift({ t, time: 'Ahora', u: 1 });
+  S.notifs = S.notifs.slice(0, 30);
+  notif();
+  save();
+  if ('Notification' in window && Notification.permission === 'granted') {
+    try { new Notification('Costa Palmeras', { body: t }); } catch (e) {}
+  }
+}
+
+$('bell').onclick = e => {
+  e.stopPropagation();
+  const o = $('np').classList.toggle('on');
+  if (o) {
+    S.notifs.forEach(n => n.u = 0);
+    $('dot').style.display = 'none';
+    save();
+  } else notif();
+};
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.np') && $('np').classList.contains('on')) {
+    $('np').classList.remove('on');
+    notif();
+  }
+});
+
+$('bn').onclick = async () => {
+  if (!('Notification' in window)) return toast('Tu navegador no soporta avisos');
+  try {
+    const r = await Notification.requestPermission();
+    toast(r === 'granted' ? 'Avisos activados' : 'Permiso denegado');
+  } catch (e) { toast('Avisos no disponibles'); }
+};
+
+/* Gestión de Roles */
+function role(s) {
+  staff = s;
+  $('tc').classList.toggle('on', !s);
+  $('ts').classList.toggle('on', s);
+  $('tl1').classList.toggle('on', s);
+  $('tl2').classList.toggle('on', s);
+  $('segw').classList.toggle('on', s);
+  $('hi').textContent = s ? 'Buen día, equipo' : 'Hola, ' + first() + ' 👋';
+  $('hp').textContent = s ? 'Panel de coordinación: tareas, tiempos y comunicación con clientes.' : 'Este es el avance de tu piscina. Te mantenemos al tanto en cada etapa.';
+  const u = cur();
+  $('avt').textContent = u ? u.name.trim().charAt(0).toUpperCase() : '';
+  renderAll();
+}
+
+$('tc').onclick = () => role(false);
+$('ts').onclick = () => role(true);
+$('flt').onchange = e => { flt = e.target.value; tasks(); };
+$('np2').oninput = e => $('pv').textContent = e.target.value;
+
+$('sv').onclick = () => {
+  if (needClient()) return;
+  S.status = $('ns').value;
+  S.p = +$('np2').value;
+  S.owner = $('no').value.trim();
+  const m = $('nm').value.trim();
+  notify(`Estado de obra: ${S.status} · ${S.p}% completado`);
+  if (m) { notify(m); $('nm').value = ''; }
+  prog();
+  renderLine();
+  save();
+  toast('Estado actualizado correctamente');
+};
+
+$('ad').onclick = () => {
+  if (needClient()) return;
+  const n = $('na').value;
+  dayList(sel, true).push(T($('nh').value || '09:00', n, 'Equipo asignado · Horario estimado', 'Programada', 'upcoming', n.includes('Visita') ? 'Visitas' : 'Obra'));
+  notify(`Nueva actividad: ${n} · ${DL[sel]} ${dates[sel].getDate()}`);
+  tasks();
+  toast('Actividad agregada');
+};
+
+/* Sistema de Autenticación y Cuentas */
+const ls = {
+  m: {},
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return this.m[k] || null; } },
+  set(k, v) { this.m[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { delete this.m[k]; try { localStorage.removeItem(k); } catch (e) {} }
+};
+
+async function hash(pw, salt) {
+  try {
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salt + pw));
+    return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+  } catch (e) {
+    return btoa(salt + pw);
+  }
+}
+
+function cur() {
+  const e = ls.get('cp_session');
+  const U = ls.get('cp_users') || {};
+  return e && U[e] ? U[e] : null;
+}
+
+function first() {
+  const u = cur();
+  return u ? u.name.split(' ')[0] : 'Cliente';
+}
+
+function clients() {
+  const U = ls.get('cp_users') || {};
+  return Object.values(U).filter(x => x.role === 'cliente');
+}
+
+function authUI() {
+  const u = cur();
+  const isStaff = !!u && u.role === 'equipo';
+  $('nl1').style.display = u ? 'none' : 'inline-block';
+  $('nl2').style.display = u ? 'none' : 'inline-block';
+  $('out').style.display = u ? 'inline-block' : 'none';
+  $('burger').style.display = u ? 'flex' : 'none';
+  $('tabs').style.display = 'none';
+  $('cl').style.display = isStaff ? 'inline-block' : 'none';
+  if (u) $('out').textContent = 'Salir (' + first() + ')';
+  if (isStaff) {
+    const cs = clients(), keep = $('cl').value;
+    $('cl').innerHTML = cs.length
+      ? cs.map(c => `<option value="${esc(c.email)}">${esc(c.name)} · ${esc(c.code || c.email)}</option>`).join('')
+      : '<option value="">Sin clientes registrados</option>';
+    if (keep && cs.some(c => c.email === keep)) $('cl').value = keep;
+    openProject($('cl').value || null);
+  } else {
+    openProject(u ? u.email : null);
+  }
+  role(isStaff);
+}
+
+$('cl').onchange = () => { openProject($('cl').value || null); renderAll(); };
+
+function start(em) {
+  ls.set('cp_session', em);
+  authUI();
+  go('mi-obra');
+  toast('Sesión iniciada con éxito');
+}
+
+/* Inicializar Usuario Demo por defecto si la base está vacía */
+async function initDemoUser() {
+  const U = ls.get('cp_users');
+  const d = U && U['mariana@ejemplo.com'];
+  if (d && d.salt === 'demo1234') {
+    delete U['mariana@ejemplo.com'];
+    ls.set('cp_users', U);
+    if (ls.get('cp_session') === 'mariana@ejemplo.com') ls.del('cp_session');
+  }
+}
+
+$('fr').onsubmit = async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const em = f.get('email').trim().toLowerCase();
+  const U = ls.get('cp_users') || {};
+  const er = t => { $('re').textContent = t; };
+
+  if (U[em]) return er('Ya existe una cuenta registrada con ese email.');
+  if (f.get('pw').length < 8) return er('La contraseña debe tener al menos 8 caracteres.');
+  if (f.get('pw') !== f.get('pw2')) return er('Las contraseñas no coinciden.');
+
+  const salt = Math.random().toString(36).slice(2);
+  U[em] = {
+    name: f.get('name').trim(),
+    email: em,
+    salt,
+    h: await hash(f.get('pw'), salt),
+    role: f.get('role'),
+    code: f.get('code').trim()
+  };
+  ls.set('cp_users', U);
+  er('');
+  e.target.reset();
+  start(em);
+};
+
+$('fl').onsubmit = async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const em = f.get('email').trim().toLowerCase();
+  const U = ls.get('cp_users') || {};
+  const u = U[em];
+
+  if (!u || u.h !== await hash(f.get('pw'), u.salt)) {
+    return $('le').textContent = 'Email o contraseña incorrectos.';
+  }
+
+  $('le').textContent = '';
+  e.target.reset();
+  start(em);
+};
+
+$('out').onclick = e => {
+  e.preventDefault();
+  ls.del('cp_session');
+  authUI();
+  go('login');
+  toast('Sesión cerrada');
+};
+
+/* Inicialización general */
+initDemoUser().then(() => {
+  prog();
+  notif();
+  authUI();
+  tasks();
+  show((location.hash || '#/mi-obra').slice(2));
+});
+</script>
+</body>
+</html>

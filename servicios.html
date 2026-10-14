@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicios y accesorios | Costa Palmeras</title>
+  <meta name="description" content="Conocé más opciones de iluminación y climatización para tu piscina.">
+  <meta name="theme-color" content="#FAF6F0">
+  <link rel="icon" href="./images/logopalmeras.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: { 900: '#062B1B', 700: '#145A38' },
+            teal: { deep: '#00763F', caribe: '#2FA566' },
+            sand: { 50: '#FAF6F0', 100: '#F8F5F0', 200: '#E8E6D6' },
+            gold: { DEFAULT: '#FFB81C', soft: '#FFD27A' }
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+  <style>
+    body { font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:#dfeee4; color:#062B1B; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Cormorant Garamond',Georgia,serif; }
+    :focus-visible { outline:2px solid #FFB81C; outline-offset:3px; }
+    .service-image { aspect-ratio:1/1; object-fit:cover; }
+    .service-copy { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding:1.25rem 1.25rem 1.5rem; }
+    .service-card { background: rgba(255,255,255,.94); border: 1px solid rgba(10,76,48,.12); box-shadow: 0 10px 25px rgba(6,43,27,.06); }
+    .service-card h2 { font-size: clamp(2rem, 2vw + 1rem, 3rem); }
+    .service-card p { font-size: .98rem; line-height: 1.65; }
+    .service-tabs { display:flex; flex-wrap:wrap; gap:.65rem; }
+    .service-tab { border:1px solid rgba(0,118,63,.3); border-radius:999px; background:rgba(255,255,255,.75); color:#145A38; padding:.7rem 1.15rem; font-size:.9rem; font-weight:600; transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease; }
+    .service-tab:hover { border-color:#00763F; transform:translateY(-1px); }
+    .service-tab[aria-selected="true"] { border-color:#00763F; background:#00763F; color:#fff; }
+    .service-panel { animation:servicePanelIn .35s ease both; }
+    .service-placeholder { display:grid; min-height:260px; aspect-ratio:1/1; place-items:center; overflow:hidden; background-color:#bcd8c8; background-image:linear-gradient(135deg,rgba(6,43,27,.2),rgba(47,165,102,.08)),repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.24) 40px 42px),repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.24) 40px 42px); color:#145A38; }
+    .service-placeholder.reforms { background-color:#c5d9cd; background-image:linear-gradient(135deg,rgba(6,43,27,.25),rgba(47,165,102,.12)),radial-gradient(ellipse at 70% 70%,rgba(255,255,255,.55),transparent 55%); }
+    .service-placeholder.postventa { background-color:#d2e2d6; background-image:linear-gradient(135deg,rgba(6,43,27,.18),rgba(47,165,102,.08)),radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.65),transparent 55%); }
+    .service-placeholder svg { width:4rem; height:4rem; padding:1rem; border-radius:1.25rem; background:rgba(255,255,255,.78); }
+    .coating-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:1.25rem; }
+    .coating-card { min-width:0; }
+    .product-gallery { position:relative; overflow:hidden; aspect-ratio:16/10; background:#c5d9cd; }
+    .product-gallery-track { display:flex; width:100%; height:100%; transition:transform .45s ease; }
+    .product-gallery-track img { display:block; flex:0 0 100%; width:100%; height:100%; object-fit:cover; }
+    .product-gallery-arrow { position:absolute; top:50%; display:grid; width:40px; height:40px; place-items:center; transform:translateY(-50%); border:1px solid rgba(6,43,27,.18); border-radius:50%; background:rgba(255,255,255,.94); color:#145A38; box-shadow:0 4px 14px rgba(0,0,0,.15); }
+    .product-gallery-arrow:hover { background:#fff; }
+    .product-gallery-arrow.prev { left:.75rem; }
+    .product-gallery-arrow.next { right:.75rem; }
+    .product-gallery-count { position:absolute; right:.75rem; bottom:.75rem; border-radius:999px; background:rgba(6,43,27,.78); color:#fff; padding:.3rem .65rem; font-size:.75rem; font-variant-numeric:tabular-nums; }
+    @keyframes servicePanelIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(0,118,63,.55); border-radius:999px; padding:.7rem 1.2rem; color:#00763F; font-size:.9rem; font-weight:600; transition:background .25s ease,border-color .25s ease,color .25s ease,transform .25s ease; }
+    .btn-outline:hover { background:#00763F; border-color:#00763F; color:#fff; transform:translateY(-2px); }
+    .service-shell { background: linear-gradient(180deg, rgba(120, 167, 138, 0.32) 0%, rgba(202, 224, 208, 0.5) 100%); }
+    @media (min-width:768px) {
+      .service-image { min-height:260px; }
+      .service-copy { padding:1.6rem 2rem 1.8rem; }
+      .service-card { min-height: 280px; }
+    }
+    @media (min-width:768px) {
+      .coating-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .product-gallery-track { transition:none; }
+    }
+    .btn-gold { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; padding:.85rem 1.5rem; border-radius:999px; background:linear-gradient(135deg,#FFD27A,#FFB81C); color:#062B1B; font-weight:600; transition:transform .25s ease; }
+    .btn-gold:hover { transform:translateY(-2px); }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-20 border-b border-teal-deep/15 bg-sand-50/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
+      <a href="index.html#inicio" aria-label="Costa Palmeras, inicio">
+        <img src="./images/cropped-logo-horizontal-350x66.png" alt="Costa Palmeras" class="h-9 w-auto" onerror="this.style.display='none'">
+      </a>
+      <a href="index.html#amenidades" class="text-sm font-semibold text-teal-deep hover:underline">Volver a accesorios</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8 sm:pt-20">
+      <p class="text-sm font-semibold uppercase text-teal-deep">Costa Palmeras · Servicios</p>
+      <h1 class="mt-3 max-w-3xl text-5xl font-semibold leading-tight sm:text-6xl">Más formas de disfrutar tu pileta</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-night-700/80">Explorá nuestros servicios para completar tu proyecto, cuidar tu piscina y disfrutarla por más tiempo.</p>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 pb-20 pt-4 sm:px-8" aria-label="Más servicios para piscinas">
+      <div class="service-tabs mb-6" role="tablist" aria-label="Categorías de servicios">
+        <button class="service-tab" id="tab-accesorios" type="button" role="tab" aria-selected="true" aria-controls="panel-accesorios" tabindex="0" data-service-tab="accesorios">Accesorios</button>
+        <button class="service-tab" id="tab-revestimientos" type="button" role="tab" aria-selected="false" aria-controls="panel-revestimientos" tabindex="-1" data-service-tab="revestimientos">Revestimientos</button>
+        <button class="service-tab" id="tab-reformas" type="button" role="tab" aria-selected="false" aria-controls="panel-reformas" tabindex="-1" data-service-tab="reformas">Reparaciones y Reformas</button>
+        <button class="service-tab" id="tab-postventa" type="button" role="tab" aria-selected="false" aria-controls="panel-postventa" tabindex="-1" data-service-tab="postventa">Postventa</button>
+      </div>
+
+      <div class="service-shell rounded-2xl p-4 sm:p-5">
+        <div class="service-panel space-y-5" id="panel-accesorios" role="tabpanel" aria-labelledby="tab-accesorios" data-service-panel="accesorios" tabindex="0">
+          <article class="service-card grid overflow-hidden rounded-2xl md:grid-cols-[.82fr_1.18fr]">
+            <img class="service-image w-full" src="./images/Piscina azul bajo palmeras nocturnas.png" alt="Piscina iluminada con luces LED durante la noche" loading="lazy" onerror="this.onerror=null;this.src='./images/3-r6drh9wai3jbusg0ssw490w6aup1zk6fauwk1zytvg.jpg'">
+            <div class="service-copy">
+              <h2 class="font-semibold text-teal-deep">Iluminación LED</h2>
+              <p class="mt-3 max-w-xl text-night-700/80">Transformá la piscina en el centro de tus noches al aire libre. La iluminación LED realza sus formas, mejora la visibilidad y crea el ambiente ideal para compartir, con bajo consumo y larga duración.</p>
+              <a class="btn-outline mt-5" href="index.html#contacto">Conocer más <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            </div>
+          </article>
+
+          <article class="service-card grid overflow-hidden rounded-2xl md:grid-cols-[.82fr_1.18fr]">
+            <img class="service-image w-full" src="./images/3-r6drh9wai3jbusg0ssw490w6aup1zk6fauwk1zytvg.jpg" alt="Piscina residencial con escalones amplios y agua cristalina" loading="lazy">
+            <div class="service-copy">
+              <h2 class="font-semibold text-teal-deep">Climatización de piscina</h2>
+              <p class="mt-3 max-w-xl text-night-700/80">Disfrutá el agua con una temperatura agradable y extendé la temporada más allá de los días de calor. La caldera eléctrica se integra al sistema de filtrado y ofrece un funcionamiento silencioso, control preciso y la comodidad de climatizar sin gas ni combustibles.</p>
+              <a class="btn-outline mt-5" href="index.html#contacto">Contactar <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="service-panel hidden" id="panel-revestimientos" role="tabpanel" aria-labelledby="tab-revestimientos" data-service-panel="revestimientos" tabindex="0" hidden>
+          <div class="mb-6 max-w-4xl space-y-4 text-night-700/80">
+            <p class="text-lg leading-relaxed">¿Sabías que el revestimiento de tu piscina no solo mejora su apariencia, sino que también protege la estructura y alarga su vida útil? A diferencia de la pintura, que requiere mantenimiento constante y retoques periódicos, los revestimientos ofrecen una solución duradera y de bajo mantenimiento. Esto significa menos trabajo para ti y más tiempo para disfrutar de tu piscina.</p>
+            <p class="text-lg leading-relaxed">En Costa Palmeras, ofrecemos una variedad de opciones para que encuentres el revestimiento ideal según tus necesidades y estilo.</p>
+          </div>
+          <div class="coating-grid">
+            <article class="service-card coating-card overflow-hidden rounded-2xl">
+              <div class="product-gallery" data-product-gallery aria-label="Fotos de revestimiento Simil Bali">
+                <div class="product-gallery-track">
+                  <img src="./images/SIMIL%20BALI1.webp" alt="Revestimiento Simil Bali en piscina residencial" loading="lazy">
+                  <img src="./images/SIMIL%20BALI2.webp" alt="Detalle del revestimiento Simil Bali en una piscina" loading="lazy">
+                  <img src="./images/SIMIL%20BALI3.webp" alt="Piscina con revestimiento Simil Bali y escalones" loading="lazy">
+                </div>
+                <button class="product-gallery-arrow prev" type="button" aria-label="Foto anterior de Simil Bali" data-gallery-prev><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+                <button class="product-gallery-arrow next" type="button" aria-label="Foto siguiente de Simil Bali" data-gallery-next><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+                <span class="product-gallery-count" aria-live="polite">1 / 3</span>
+              </div>
+              <div class="service-copy">
+                <h2 class="font-semibold text-teal-deep">Simil Bali</h2>
+                <p class="mt-3 max-w-xl text-night-700/80">Revestimiento con textura rústica que hace alusión a espacios naturales por su tonalidad verde como los contrastes del mar. Crea ambientes tranquilos y llenos de personalidad. Este revestimiento es una apuesta segura para generar ambientes exclusivos. Es antideslizante, requiere poco mantenimiento y es térmicamente estable. Tiene un tamaño por pieza de 10x10 cm, y su presentación es en malla de 30x40 cm. Viene en tres colores: verde, azul y gris.</p>
+              </div>
+            </article>
+
+            <article class="service-card coating-card overflow-hidden rounded-2xl">
+              <div class="product-gallery" data-product-gallery aria-label="Fotos de Piedra Bali">
+                <div class="product-gallery-track">
+                  <img src="./images/piedrabali1.webp" alt="Piedra Bali en el interior de una piscina" loading="lazy">
+                  <img src="./images/piedrabali2.webp" alt="Piscina revestida con Piedra Bali" loading="lazy">
+                  <img src="./images/piedrabali3.webp" alt="Detalle de terminación con Piedra Bali en piscina" loading="lazy">
+                </div>
+                <button class="product-gallery-arrow prev" type="button" aria-label="Foto anterior de Piedra Bali" data-gallery-prev><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+                <button class="product-gallery-arrow next" type="button" aria-label="Foto siguiente de Piedra Bali" data-gallery-next><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+                <span class="product-gallery-count" aria-live="polite">1 / 3</span>
+              </div>
+              <div class="service-copy">
+                <h2 class="font-semibold text-teal-deep">Piedra Bali</h2>
+                <p class="mt-3 max-w-xl text-night-700/80">Piedra exótica originaria de Indonesia que contiene propiedades tónicas utilizadas para purificar el agua. Tiene un tamaño por pieza de 10x10 cm. Su color, de un tono verdoso que se torna esmeralda bajo el agua, crea espacios de una singular naturalidad y belleza.</p>
+              </div>
+            </article>
+
+            <article class="service-card coating-card overflow-hidden rounded-2xl">
+              <div class="product-gallery" data-product-gallery aria-label="Fotos de Venecitas Vítreas">
+                <div class="product-gallery-track">
+                  <img src="./images/vinecitas1.webp" alt="Venecitas vítreas en una piscina" loading="lazy">
+                  <img src="./images/VENECITAS2VITREAS.webp" alt="Detalle de mosaicos de venecitas vítreas" loading="lazy">
+                  <img src="./images/VENECITASVITREAS3.webp" alt="Revestimiento de venecitas vítreas en piscina" loading="lazy">
+                </div>
+                <button class="product-gallery-arrow prev" type="button" aria-label="Foto anterior de Venecitas Vítreas" data-gallery-prev><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+                <button class="product-gallery-arrow next" type="button" aria-label="Foto siguiente de Venecitas Vítreas" data-gallery-next><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+                <span class="product-gallery-count" aria-live="polite">1 / 3</span>
+              </div>
+              <div class="service-copy">
+                <h2 class="font-semibold text-teal-deep">Venecitas Vítreas</h2>
+                <p class="mt-3 max-w-xl text-night-700/80">Revestimiento veneciano formato 2x2 cm importado, en vidrio fundido a 1.400 °C. Posee excelente resistencia a la humedad, cambios de temperatura y productos químicos. Su color se mantiene inalterable con el tiempo y la luz solar. (Consultar catálogo, diseños y disponibilidad de colores).</p>
+                <p class="mt-4 rounded-xl border border-teal-deep/15 bg-teal-deep/5 p-4 text-sm leading-relaxed text-night-700/90"><strong class="text-teal-deep">Black Lava:</strong> También contamos con piedra volcánica Black Lava (tonalidades negras) traída de los volcanes de Asia, con propiedades y texturas ideales para acabados exclusivos.</p>
+              </div>
+            </article>
+
+            <article class="service-card coating-card overflow-hidden rounded-2xl">
+              <div class="product-gallery" data-product-gallery aria-label="Fotos de Venecitas de Polipropileno">
+                <div class="product-gallery-track">
+                  <img src="./images/VVENECITASPOLI1.webp" alt="Piscina revestida con venecitas de polipropileno" loading="lazy">
+                  <img src="./images/venecitasPOLI2.webp" alt="Detalle de venecitas de polipropileno en piscina" loading="lazy">
+                </div>
+                <button class="product-gallery-arrow prev" type="button" aria-label="Foto anterior de Venecitas de Polipropileno" data-gallery-prev><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+                <button class="product-gallery-arrow next" type="button" aria-label="Foto siguiente de Venecitas de Polipropileno" data-gallery-next><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+                <span class="product-gallery-count" aria-live="polite">1 / 2</span>
+              </div>
+              <div class="service-copy">
+                <h2 class="font-semibold text-teal-deep">Venecitas de Polipropileno</h2>
+                <p class="mt-3 max-w-xl text-night-700/80">Revestimiento veneciano nacional de polipropileno. Destaca por ser excelente aislante térmico y acústico, de colocación rápida y sencilla, 100% reciclable, liviano, flexible, ignífugo, antideslizante y altamente resistente a la intemperie, rayos UV y químicos. (Consultar catálogo, diseños y disponibilidad de colores).</p>
+              </div>
+            </article>
+
+            <article class="service-card coating-card overflow-hidden rounded-2xl">
+              <div class="product-gallery" data-product-gallery aria-label="Fotos de Cementicio Marmolite">
+                <div class="product-gallery-track">
+                  <img src="./images/marmolite1.webp" alt="Piscina terminada con revestimiento Cementicio Marmolite" loading="lazy">
+                  <img src="./images/MARMOLITE2.webp" alt="Piscina con acabado Cementicio Marmolite claro" loading="lazy">
+                  <img src="./images/MARMOLITE3.webp" alt="Detalle de piscina revestida con Cementicio Marmolite" loading="lazy">
+                </div>
+                <button class="product-gallery-arrow prev" type="button" aria-label="Foto anterior de Cementicio Marmolite" data-gallery-prev><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+                <button class="product-gallery-arrow next" type="button" aria-label="Foto siguiente de Cementicio Marmolite" data-gallery-next><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+                <span class="product-gallery-count" aria-live="polite">1 / 3</span>
+              </div>
+              <div class="service-copy">
+                <h2 class="font-semibold text-teal-deep">Cementicio Marmolite</h2>
+                <p class="mt-3 max-w-xl text-night-700/80">Revestimiento que permite lograr superficies completamente impermeables, de fácil aplicación y bajísimo mantenimiento. Brinda un aspecto natural que armoniza la piscina con el entorno. Es antideslizante (sin raspar), de alta durabilidad sin decolorar y permite restaurar piscinas de forma rápida y limpia.</p>
+                <p class="mt-4 rounded-xl border border-teal-deep/15 bg-teal-deep/5 p-4 text-sm leading-relaxed text-night-700/90"><strong class="text-teal-deep">Variantes de color:</strong> Blanco seda, blanco granito, cielo, marfil, arena, verde esmeralda, turquesa, negro noche, índigo. (Consultar disponibilidad).</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="service-panel hidden" id="panel-reformas" role="tabpanel" aria-labelledby="tab-reformas" data-service-panel="reformas" tabindex="0" hidden>
+          <article class="service-card grid overflow-hidden rounded-2xl md:grid-cols-[.82fr_1.18fr]">
+            <div class="service-placeholder reforms w-full" role="img" aria-label="Imagen ilustrativa de reparaciones y reformas de piscinas">
+              <i data-lucide="wrench" aria-hidden="true"></i>
+            </div>
+            <div class="service-copy">
+              <h2 class="font-semibold text-teal-deep">Reparaciones y Reformas</h2>
+              <p class="mt-3 max-w-xl text-night-700/80">Con el tiempo, las piscinas pueden desgastarse o necesitar mejoras para seguir ofreciendo seguridad, eficiencia y estética. Nuestros servicios de reformas y reparaciones están diseñados para que disfrutes de una piscina como nueva, sin complicaciones.</p>
+              <a class="btn-outline mt-5" href="index.html#contacto">Consultar por reformas <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="service-panel hidden" id="panel-postventa" role="tabpanel" aria-labelledby="tab-postventa" data-service-panel="postventa" tabindex="0" hidden>
+          <article class="service-card grid overflow-hidden rounded-2xl md:grid-cols-[.82fr_1.18fr]">
+            <div class="service-placeholder postventa w-full" role="img" aria-label="Imagen ilustrativa del servicio de postventa">
+              <i data-lucide="life-buoy" aria-hidden="true"></i>
+            </div>
+            <div class="service-copy">
+              <h2 class="font-semibold text-teal-deep">Servicio de Postventa</h2>
+              <p class="mt-3 max-w-xl text-night-700/80">Nuestro servicio de postventa es una muestra de nuestro compromiso a largo plazo con la satisfacción de nuestros clientes. Entendemos que la tranquilidad y confianza son fundamentales para disfrutar plenamente de su piscina, por lo que garantizamos una asistencia integral en caso de cualquier eventualidad.</p>
+              <a class="btn-outline mt-5" href="index.html#contacto">Contactar a soporte <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white px-5 py-14 text-center sm:px-8">
+      <h2 class="text-3xl font-semibold sm:text-4xl">¿Querés sumar alguno de estos servicios?</h2>
+      <a class="btn-gold mt-6" href="index.html#contacto"><i data-lucide="message-circle" class="h-5 w-5"></i> Consultar por WhatsApp</a>
+    </section>
+  </main>
+
+  <footer class="bg-night-900 py-7 text-white/70">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 text-sm sm:px-8">
+      <a href="index.html#inicio" class="font-semibold text-white">Costa Palmeras</a>
+      <span>&copy; 2026 Costa Palmeras · Rojas, Buenos Aires</span>
+      <a href="index.html#amenidades" class="hover:text-gold-soft">Accesorios</a>
+    </div>
+  </footer>
+  <script>
+    var serviceTabs = Array.from(document.querySelectorAll('[data-service-tab]'));
+    var servicePanels = Array.from(document.querySelectorAll('[data-service-panel]'));
+
+    function selectServiceTab(tab, focusTab) {
+      var activeCategory = tab.dataset.serviceTab;
+      serviceTabs.forEach(function (item) {
+        var selected = item === tab;
+        item.setAttribute('aria-selected', String(selected));
+        item.tabIndex = selected ? 0 : -1;
+      });
+      servicePanels.forEach(function (panel) {
+        var selected = panel.dataset.servicePanel === activeCategory;
+        panel.hidden = !selected;
+        panel.classList.toggle('hidden', !selected);
+      });
+      if (focusTab) tab.focus();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    serviceTabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () { selectServiceTab(tab, false); });
+      tab.addEventListener('keydown', function (event) {
+        var nextIndex = index;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % serviceTabs.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + serviceTabs.length) % serviceTabs.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = serviceTabs.length - 1;
+        else return;
+        event.preventDefault();
+        selectServiceTab(serviceTabs[nextIndex], true);
+      });
+    });
+
+    document.querySelectorAll('[data-product-gallery]').forEach(function (gallery) {
+      var track = gallery.querySelector('.product-gallery-track');
+      var count = gallery.querySelector('.product-gallery-count');
+      var slides = track.querySelectorAll('img');
+      var index = 0;
+
+      function showSlide(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        count.textContent = (index + 1) + ' / ' + slides.length;
+      }
+
+      gallery.querySelector('[data-gallery-prev]').addEventListener('click', function () {
+        showSlide(index - 1);
+      });
+      gallery.querySelector('[data-gallery-next]').addEventListener('click', function () {
+        showSlide(index + 1);
+      });
+    });
+
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

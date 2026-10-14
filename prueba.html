@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Costa Palmeras – Piscinas para toda la vida</title>
+<meta name="description" content="Construcción de piscinas de hormigón de diseño en Rojas y toda la región. 30 años de trayectoria.">
+<meta name="theme-color" content="#00763F">
+
+<!-- ========== [BLOQUE 1] ASSETS ORIGINALES ==========
+     Favicon, logo e imagen de hero conservan las rutas del index original (./images/...).
+     Si una imagen no carga, se reemplaza automáticamente por un fallback elegante (ver imgFallback()). -->
+<link rel="icon" href="./images/logopalmeras.png">
+
+<!-- Fuentes: Cormorant Garamond (títulos) + Plus Jakarta Sans (cuerpo) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN) + configuración de la paleta -->
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          night:  { 900: '#062B1B', 700: '#145A38' },
+          teal:   { caribe: '#2FA566', deep: '#00763F', sky: '#00763F' },
+          sand:   { 50: '#FAF6F0', 100: '#F8F5F0', 200: '#E8E6D6' },
+          gold:   { DEFAULT: '#FFB81C', soft: '#FFD27A', sun: '#F59E0B' }
+        },
+        fontFamily: {
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+
+<!-- Lucide Icons -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+
+<!-- Fallback de imágenes (se define temprano para que los onerror lo encuentren) -->
+<script>
+  // Si una imagen falla, muestra un degradado marino con el nombre de la pieza
+  function imgFallback(el) {
+    el.onerror = null;
+    var label = (el.alt || 'Costa Palmeras').replace(/[<>&"]/g, '');
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#145A38"/><stop offset="1" stop-color="#2FA566"/></linearGradient></defs>' +
+      '<rect width="1200" height="800" fill="url(#g)"/>' +
+      '<g fill="none" stroke="rgba(255,255,255,.28)" stroke-width="3"><path d="M0 560 Q150 520 300 560 T600 560 T900 560 T1200 560"/><path d="M0 620 Q150 580 300 620 T600 620 T900 620 T1200 620"/></g>' +
+      '<text x="600" y="400" fill="rgba(255,255,255,.85)" font-family="Georgia,serif" font-size="44" text-anchor="middle">' + label + '</text></svg>';
+    el.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+</script>
+
+<!-- ========== [BLOQUE 2] ESTILOS PERSONALIZADOS ========== -->
+<style>
+  :root {
+    --night: #062B1B; --night-2: #145A38;
+    --teal: #2FA566; --teal-deep: #00763F; --sky: #00763F;
+    --sand: #F8F5F0; --sand-2: #E8E6D6; --ivory: #FAF6F0;
+    --gold: #FFB81C; --gold-soft: #FFD27A; --sun: #F59E0B;
+    --ease: cubic-bezier(.22,.8,.26,1);
+  }
+  html { scroll-padding-top: 84px; }
+  body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: var(--ivory); color: var(--night); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; }
+
+  /* ---- Navbar: transparente con vidrio → sólido al hacer scroll ---- */
+  #nav { transition: background .4s var(--ease), box-shadow .4s var(--ease), padding .4s var(--ease); background: rgba(6,43,27,.25); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  #nav.solid { background: rgba(250,246,240,.97); box-shadow: 0 8px 28px rgba(6,43,27,.14); }
+  .logo-nav { filter: brightness(0) invert(1); transition: filter .4s var(--ease); }
+  #nav.solid .logo-nav { filter: none; }              /* logo original a color sobre fondo claro */
+  #nav.solid .nav-link { color: #145A38; }
+  #nav.solid .nav-link:hover, #nav.solid .nav-link.active { color: #00763F; }
+  #nav.solid .btn-ghost { color: #00763F; border-color: rgba(0,118,63,.45); }
+  #nav.solid .btn-ghost:hover { background: rgba(0,118,63,.08); border-color: #00763F; }
+  #nav.solid #burger { color: #00763F; }
+  .nav-link { position: relative; padding: 6px 2px; font-size: .88rem; font-weight: 500; color: rgba(255,255,255,.82); transition: color .25s; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0; background: var(--gold); transition: width .35s var(--ease); }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .nav-link.active::after, .nav-link:hover::after { width: 100%; }
+
+  /* ---- Botones ---- */
+  .btn-gold { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: var(--night); font-weight: 600; padding: .9rem 1.8rem; border-radius: 999px; transition: transform .3s var(--ease), box-shadow .3s var(--ease); box-shadow: 0 8px 24px rgba(255,184,28,.28); }
+  .btn-gold:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 34px rgba(255,184,28,.45); }
+  .btn-ghost { display:inline-flex; align-items:center; gap:.5rem; border: 1px solid rgba(255,255,255,.4); color:#fff; padding:.85rem 1.6rem; border-radius:999px; transition: background .3s, border-color .3s; }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); border-color:#fff; }
+  .pulse-soft { animation: pulseSoft 2.8s ease-in-out infinite; }
+  @keyframes pulseSoft { 0%,100% { box-shadow: 0 8px 24px rgba(255,184,28,.28), 0 0 0 0 rgba(255,184,28,.45); } 50% { box-shadow: 0 8px 24px rgba(255,184,28,.28), 0 0 0 14px rgba(255,184,28,0); } }
+
+  /* ---- Hero ---- */
+  #hero-bg { will-change: transform; }
+  .hero-in { opacity: 0; transform: translateY(26px); animation: heroIn 1s var(--ease) forwards; }
+  .hero-in:nth-child(1) { animation-delay: .25s; } .hero-in:nth-child(2) { animation-delay: .55s; }
+  .hero-in:nth-child(3) { animation-delay: .85s; } .hero-in:nth-child(4) { animation-delay: 1.1s; }
+  @keyframes heroIn { to { opacity: 1; transform: none; } }
+
+  /* ---- Scroll reveal (IntersectionObserver añade .in) ---- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---- Tarjetas ---- */
+  .lift { transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s; }
+  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 50px -18px rgba(6,43,27,.35), 0 0 0 1px rgba(255,184,28,.45); }
+  .amenity .ico { transition: background .3s, color .3s, transform .45s var(--ease); }
+  .amenity:hover .ico { background: var(--gold); color: var(--night); transform: rotate(-6deg) scale(1.08); }
+  .zoom img { transition: transform 1.1s var(--ease); }
+  .zoom:hover img { transform: scale(1.08); }
+
+  /* ---- Filtros (Mi Obra / Galería) ---- */
+  .chip { padding: .55rem 1.2rem; border-radius: 999px; font-size: .85rem; font-weight: 500; border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.8); transition: all .3s var(--ease); }
+  .chip:hover { border-color: var(--gold); color: #fff; }
+  .chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--night); font-weight: 600; }
+  .chip-light { border-color: rgba(6,43,27,.2); color: var(--night-2); }
+  .chip-light:hover { color: var(--night); }
+
+  .obra-card { animation: cardIn .55s var(--ease) both; }
+  @keyframes cardIn { from { opacity:0; transform: translateY(18px) scale(.97); } to { opacity:1; transform:none; } }
+
+  .progress { height: 5px; border-radius: 99px; background: rgba(255,255,255,.18); overflow: hidden; }
+  .progress i { display:block; height:100%; width:0; background: linear-gradient(90deg, var(--teal), var(--gold-soft)); transition: width 1.2s var(--ease); }
+
+  /* ---- Modales ---- */
+  .overlay { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(3,20,12,.78); backdrop-filter: blur(8px); }
+  .overlay.open { display: flex; animation: fade .3s ease both; }
+  .sheet { animation: pop .45s var(--ease) both; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pop { from { opacity:0; transform: translateY(24px) scale(.96); } to { opacity:1; transform:none; } }
+  .thumb { opacity: .55; transition: opacity .25s, outline-color .25s; outline: 2px solid transparent; outline-offset: 2px; }
+  .thumb:hover { opacity: .9; } .thumb.on { opacity: 1; outline-color: var(--gold); }
+
+  /* ---- Formularios ---- */
+  .field { width: 100%; background: #fff; border: 1px solid var(--sand-2); border-radius: 12px; padding: .8rem 1rem; font-size: .95rem; transition: border-color .25s, box-shadow .25s; }
+  .field:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 4px rgba(47,165,102,.15); }
+  .field.bad { border-color: #c2410c; box-shadow: 0 0 0 4px rgba(194,65,12,.1); }
+  .field.ok { border-color: var(--teal-caribe, #2FA566); }
+  .msg-err { color: #c2410c; font-size: .78rem; min-height: 1.1rem; margin-top: .25rem; }
+  .field-dark { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); color: #fff; }
+  .field-dark::placeholder { color: rgba(255,255,255,.55); }
+  .field-dark option { color: var(--night); }
+
+  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 30px); opacity: 0; pointer-events: none; z-index: 120; background: var(--night); color: #fff; padding: .8rem 1.3rem; border-radius: 12px; border: 1px solid rgba(255,184,28,.5); transition: all .35s var(--ease); }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+  .wa-float { position: fixed; right: 22px; bottom: 22px; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; z-index: 60; box-shadow: 0 12px 28px rgba(37,211,102,.45); transition: transform .3s var(--ease); }
+  .wa-float:hover { transform: scale(1.1) translateY(-3px); }
+
+  .wave-sep { display:block; width:100%; height: 70px; }
+  body.lock { overflow: hidden; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    .reveal, .hero-in { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+
+<body class="overflow-x-hidden">
+
+<!-- ========== [BLOQUE 3] NAVBAR INTELIGENTE ========== -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 py-4">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 flex items-center justify-between gap-6">
+    <a href="#inicio" class="flex items-center shrink-0" aria-label="Costa Palmeras, inicio">
+      <!-- LOGO ORIGINAL (sin cambios de ruta). Se invierte a blanco para el fondo oscuro -->
+      <img src="./images/cropped-logo-horizontal-350x66.png" alt="Costa Palmeras" class="logo-nav h-9 sm:h-11 w-auto" onerror="imgFallback(this)">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Principal">
+      <a class="nav-link" href="#proyecto">El proyecto</a>
+      <a class="nav-link" href="#amenidades">Accesorios</a>
+      <a class="nav-link" href="#modelos">Modelos</a>
+      <a class="nav-link" href="#mi-obra">Mi Obra</a>
+      <a class="nav-link" href="#galeria">Galería</a>
+      <a class="nav-link" href="#ubicacion">Ubicación</a>
+      <a class="nav-link" href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <!-- Enlace original a tu portal de clientes -->
+      <a href="miobra.html" class="hidden sm:inline-flex btn-ghost text-sm"><i data-lucide="log-in" class="w-4 h-4"></i> Iniciar sesión</a>
+      <button id="burger" class="lg:hidden text-white p-2" aria-label="Abrir menú" aria-expanded="false" aria-controls="drawer"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div id="drawer" class="lg:hidden hidden border-t border-white/10 bg-night-900/98" style="background: rgba(6,43,27,.98)">
+    <div class="px-6 py-5 flex flex-col gap-4 text-white/90">
+      <a href="#proyecto" class="drawer-link">El proyecto</a><a href="#amenidades" class="drawer-link">Accesorios</a>
+      <a href="#modelos" class="drawer-link">Modelos</a><a href="#mi-obra" class="drawer-link">Mi Obra</a>
+      <a href="#galeria" class="drawer-link">Galería</a><a href="#ubicacion" class="drawer-link">Ubicación</a>
+      <a href="#contacto" class="drawer-link">Contacto</a>
+      <a href="miobra.html" class="btn-gold mt-2">Iniciar sesión</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ========== [BLOQUE 4] HERO PARALLAX + FORMULARIO RÁPIDO ========== -->
+<section id="inicio" class="relative min-h-[100svh] flex items-center overflow-hidden text-white">
+  <!-- Imagen original del hero con parallax (se mueve en JS) -->
+  <div id="hero-bg" class="absolute inset-x-0 -top-[10%] h-[120%]">
+    <!-- Capa base: imagen original (se ve mientras carga el video o si el video falla) -->
+    <img src="./images/Sin-titulo-1.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=2000&q=80';this.onerror=function(){imgFallback(this)}">
+    <!-- Video de fondo: ./images/portadaweb.mp4 (silenciado, en bucle) -->
+    <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover" src="./images/portadaweb.mp4" poster="./images/Sin-titulo-1.png" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <!-- REEMPLAZO FÁCIL: cambiar el src del <video> por otro archivo de images/ -->
+  <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(6,43,27,.78) 0%, rgba(6,43,27,.45) 42%, rgba(6,43,27,.92) 100%), linear-gradient(90deg, rgba(6,43,27,.65), transparent 70%);"></div>
+
+  <div class="relative mx-auto max-w-7xl w-full px-5 sm:px-8 pt-32 pb-20 grid lg:grid-cols-[1.25fr_.75fr] gap-12 items-end">
+    <div>
+      <p class="hero-in inline-flex items-center gap-2 rounded-full border border-gold-soft/50 bg-white/5 px-4 py-1.5 text-sm text-gold-soft backdrop-blur"><i data-lucide="award" class="w-4 h-4"></i> 30 años construyendo piscinas en Rojas</p>
+      <h1 class="hero-in mt-6 text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[.98]">Piscinas para<br>toda la vida</h1>
+      <p class="hero-in mt-6 max-w-xl text-lg text-white/80 font-light leading-relaxed">Hormigón, diseño a medida y obra terminada en 8 días. Un espacio de descanso pensado para tu familia, con el cuidado de una casa boutique.</p>
+      <div class="hero-in mt-9 flex flex-wrap gap-4">
+        <a href="https://wa.me/5492475492324?text=Hola,%20quisiera%20solicitar%20presupuesto" target="_blank" rel="noopener" class="btn-gold pulse-soft"><i data-lucide="message-circle" class="w-5 h-5"></i> Solicitá tu piscina</a>
+        <a href="#mi-obra" class="btn-ghost"><i data-lucide="hard-hat" class="w-5 h-5"></i> Ver obras en curso</a>
+      </div>
+    </div>
+
+    <!-- Formulario rápido de disponibilidad -->
+    <form id="quickForm" novalidate class="hero-in rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-7 backdrop-blur-xl shadow-2xl">
+      <h2 class="text-3xl font-semibold">Consultá disponibilidad</h2>
+      <p class="text-sm text-white/70 mt-1">Te respondemos con fecha estimada de inicio de obra.</p>
+      <div class="mt-5 space-y-3">
+        <div><label class="sr-only" for="qName">Nombre</label><input id="qName" name="name" class="field field-dark" placeholder="Tu nombre" autocomplete="name"><p class="msg-err" data-err="name"></p></div>
+        <div><label class="sr-only" for="qPhone">Teléfono</label><input id="qPhone" name="phone" class="field field-dark" placeholder="Teléfono / WhatsApp" inputmode="tel" autocomplete="tel"><p class="msg-err" data-err="phone"></p></div>
+        <div><label class="sr-only" for="qMonth">Mes de inicio</label>
+          <select id="qMonth" name="month" class="field field-dark"><option value="">¿Cuándo querés empezar?</option><option>Lo antes posible</option><option>En 1 a 3 meses</option><option>En 3 a 6 meses</option><option>Solo estoy averiguando</option></select><p class="msg-err" data-err="month"></p></div>
+      </div>
+      <button class="btn-gold w-full mt-3" type="submit">Consultar fecha</button>
+    </form>
+  </div>
+
+  <a href="#proyecto" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition" aria-label="Bajar"><i data-lucide="chevrons-down" class="w-7 h-7 animate-bounce"></i></a>
+</section>
+
+<!-- ========== [BLOQUE 5] SOBRE EL PROYECTO / FILOSOFÍA ========== -->
+<section id="proyecto" class="py-24 sm:py-32 bg-sand-50">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+    <div class="reveal">
+      <h2 class="text-4xl sm:text-6xl font-semibold leading-tight">Una empresa familiar, treinta años de agua quieta.</h2>
+      <p class="mt-6 text-lg text-night-700/90 leading-relaxed max-w-xl">Somos líderes en construcción de piscinas de diseño en Rojas y toda la región. Cada obra la proyectamos, la construimos y la acompañamos después de entregada.</p>
+      <p class="mt-4 text-night-700/80 leading-relaxed max-w-xl">Trabajamos con hormigón, equipos propios y una cuadrilla que conoce su oficio. Por eso podemos comprometernos con un plazo: tu piscina, en 8 días.</p>
+      <dl class="mt-9 flex flex-wrap gap-x-12 gap-y-5">
+        <div><dt class="text-sm text-night-700/70">Trayectoria</dt><dd class="font-display text-4xl font-semibold">30 años</dd></div>
+        <div><dt class="text-sm text-night-700/70">Plazo de obra</dt><dd class="font-display text-4xl font-semibold">8 días</dd></div>
+        <div><dt class="text-sm text-night-700/70">Reseñas en Google</dt><dd class="font-display text-4xl font-semibold">4.8 / 5</dd></div>
+      </dl>
+    </div>
+
+    <div class="reveal relative" style="--d:.15s">
+      <div class="rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/5] zoom">
+        <img src="./images/imagenpabloHD.jpg" alt="Construcción Costa Palmeras" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?auto=format&fit=crop&w=1200&q=80';this.onerror=function(){imgFallback(this)}">
+      </div>
+      <figure class="relative sm:absolute sm:-bottom-10 sm:-left-10 mt-6 sm:mt-0 max-w-sm rounded-2xl bg-night-900 text-white p-6 shadow-2xl border border-gold/40" style="background:#062B1B">
+        <blockquote class="font-display text-xl italic leading-snug">“Nuestros valores generan la confianza necesaria para traducirse en acciones concretas. Ese es nuestro legado.”</blockquote>
+        <figcaption class="mt-3 text-sm text-gold-soft">Pablo Rimaulo · Director</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 6] AMENIDADES ========== -->
+<section id="amenidades" class="py-24 sm:py-28 bg-sand-100" style="background:#F8F5F0">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="reveal max-w-2xl">
+      <h2 class="text-4xl sm:text-6xl font-semibold leading-tight">Accesorios para disfrutar tu pileta</h2>
+      <p class="mt-4 text-night-700/80 text-lg">Sumá iluminación, climatización, hidromasaje y espacios de relax para adaptar la pileta a tu terreno y disfrutarla más tiempo.</p>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="amenGrid"></div>
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 7] MODELOS ========== -->
+<section id="modelos" class="py-24 sm:py-32 bg-white">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="reveal flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl sm:text-6xl font-semibold leading-tight">Cuatro modelos para empezar a conversar</h2>
+        <p class="mt-4 text-night-700/80 text-lg">Los diseñamos a medida del terreno. Estas medidas son una referencia para que veas proporciones.</p>
+      </div>
+    </div>
+    <div class="mt-14 grid md:grid-cols-2 xl:grid-cols-4 gap-6" id="modelGrid"></div>
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 8] MI OBRA (INTERACTIVO) ========== -->
+<section id="mi-obra" class="relative py-24 sm:py-32 text-white overflow-hidden" style="background: linear-gradient(180deg,#062B1B 0%,#145A38 130%)">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="reveal flex flex-wrap items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl sm:text-6xl font-semibold leading-tight">Mi Obra: mirá cómo avanza</h2>
+        <p class="mt-4 text-white/75 text-lg">Seguimiento por etapas con fotos y especificaciones. Los clientes ven su propia obra, día por día, desde el portal.</p>
+      </div>
+      <a href="miobra.html" class="btn-gold"><i data-lucide="log-in" class="w-5 h-5"></i> Entrar a mi portal</a>
+    </div>
+
+    <!-- Filtros por fase -->
+    <div class="reveal mt-10 flex flex-wrap gap-3" role="group" aria-label="Filtrar por fase" id="obraFilters"></div>
+    <p class="mt-4 text-sm text-white/50" id="obraCount" aria-live="polite"></p>
+
+    <!-- Grid dinámico -->
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-7" id="obraGrid"></div>
+    <!-- Obras de ejemplo: reemplazá el arreglo OBRAS en el script con tus obras reales -->
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 9] GALERÍA ========== -->
+<section id="galeria" class="py-24 sm:py-32 bg-sand-50">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="reveal flex flex-wrap items-end justify-between gap-6">
+      <h2 class="text-4xl sm:text-6xl font-semibold leading-tight max-w-2xl">Obras terminadas</h2>
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar galería" id="galFilters"></div>
+    </div>
+    <div class="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [&>*]:mb-5" id="galGrid"></div>
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 10] OPINIONES / RESEÑAS ========== -->
+<section class="py-24 bg-white">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="reveal flex flex-wrap items-center gap-x-6 gap-y-2 mb-10">
+      <h2 class="text-4xl sm:text-5xl font-semibold text-gray-900">Lo que dicen nuestros clientes</h2>
+    </div>
+
+    <!-- WIDGET DE TRUSTINDEX -->
+    <div class="trustindex-widget-container">
+      <script defer async src="https://cdn.trustindex.io/loader.js?768e99c836342801c706a21c2a1"></script>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 11] UBICACIÓN ========== -->
+<section id="ubicacion" class="py-24 sm:py-32 bg-sand-100" style="background:#F8F5F0">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-stretch">
+    <div class="reveal">
+      <h2 class="text-4xl sm:text-5xl font-semibold leading-tight">Visitá la casa central</h2>
+      <p class="mt-4 text-night-700/80">Pasá por Rojas y recorré nuestras piscinas y materiales.</p>
+      <ul class="mt-8 space-y-4">
+        <li class="flex gap-4 rounded-2xl bg-white p-5 border border-sand-200"><i data-lucide="map-pin" class="w-6 h-6 text-teal-deep shrink-0"></i><div><p class="font-semibold">Dirección</p><p class="text-night-700/80 text-sm">Av. Guzmán S/N, Rojas, Provincia de Buenos Aires</p></div></li>
+        <li class="flex gap-4 rounded-2xl bg-white p-5 border border-sand-200"><i data-lucide="phone" class="w-6 h-6 text-teal-deep shrink-0"></i><div class="flex-1"><p class="font-semibold">Ventas</p><a class="text-night-700/80 text-sm hover:text-teal-deep" href="tel:+5492475492324">2475 492324</a></div><button class="copy text-xs text-teal-deep font-semibold hover:underline" data-copy="2475 492324">Copiar</button></li>
+        <li class="flex gap-4 rounded-2xl bg-white p-5 border border-sand-200"><i data-lucide="mail" class="w-6 h-6 text-teal-deep shrink-0"></i><div class="flex-1"><p class="font-semibold">Correo</p><a class="text-night-700/80 text-sm hover:text-teal-deep break-all" href="mailto:ventas@costapalmeras.com">ventas@costapalmeras.com</a></div><button class="copy text-xs text-teal-deep font-semibold hover:underline" data-copy="ventas@costapalmeras.com">Copiar</button></li>
+      </ul>
+    </div>
+    <div class="reveal rounded-[2rem] overflow-hidden shadow-2xl min-h-[380px] border-4 border-white" style="--d:.15s">
+      <!-- Mapa original (embed de Google Maps) -->
+      <iframe title="Mapa de Costa Palmeras en Rojas" class="w-full h-full min-h-[380px]" style="border:0" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Rojas,+Buenos+Aires+Av+Guzman&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ========== [BLOQUE 12] CONTACTO / COTIZADOR ========== -->
+<section id="contacto" class="py-24 sm:py-32 text-white" style="background: linear-gradient(135deg,#062B1B,#145A38)">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8 grid lg:grid-cols-[.9fr_1.1fr] gap-12 items-start">
+    <div class="reveal">
+      <h2 class="text-4xl sm:text-6xl font-semibold leading-tight">Pedí tu presupuesto</h2>
+      <p class="mt-5 text-white/75 text-lg max-w-md">Contanos qué imaginás. Con unos datos del terreno armamos una propuesta y te llamamos para coordinar una visita.</p>
+      <ul class="mt-8 space-y-3 text-white/85">
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-gold-soft shrink-0 mt-0.5"></i> Presupuesto sin cargo</li>
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-gold-soft shrink-0 mt-0.5"></i> Visita técnica al terreno</li>
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-gold-soft shrink-0 mt-0.5"></i> Obra de hormigón en 8 días</li>
+      </ul>
+    </div>
+
+    <form id="contactForm" novalidate class="reveal rounded-3xl bg-white text-night-900 p-6 sm:p-9 shadow-2xl grid sm:grid-cols-2 gap-4" style="--d:.12s">
+      <div><label class="text-sm font-semibold" for="cName">Nombre y apellido</label><input id="cName" name="name" class="field mt-1" autocomplete="name"><p class="msg-err" data-err="name"></p></div>
+      <div><label class="text-sm font-semibold" for="cMail">Correo electrónico</label><input id="cMail" name="email" type="email" class="field mt-1" autocomplete="email"><p class="msg-err" data-err="email"></p></div>
+      <div><label class="text-sm font-semibold" for="cPhone">Teléfono</label><input id="cPhone" name="phone" class="field mt-1" inputmode="tel" autocomplete="tel"><p class="msg-err" data-err="phone"></p></div>
+      <div><label class="text-sm font-semibold" for="cModel">Modelo de interés</label>
+        <select id="cModel" name="model" class="field mt-1"><option value="">Elegí una opción</option><option>Clásica</option><option>Familiar</option><option>Infinity</option><option>Plunge / Spa</option><option>Todavía no lo sé</option></select><p class="msg-err" data-err="model"></p></div>
+      <div class="sm:col-span-2"><label class="text-sm font-semibold" for="cMsg">Mensaje</label><textarea id="cMsg" name="msg" rows="4" class="field mt-1" placeholder="Medidas del terreno, ubicación, ideas..."></textarea><p class="msg-err" data-err="msg"></p></div>
+      <div class="sm:col-span-2"><button class="btn-gold w-full" type="submit"><i data-lucide="send" class="w-5 h-5"></i> Enviar consulta</button></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== [BLOQUE 13] FOOTER PREMIUM ========== -->
+<footer class="text-white/70 pt-20 pb-8" style="background:#041F14">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 grid gap-12 md:grid-cols-2 lg:grid-cols-[1.3fr_.8fr_.8fr_1.2fr]">
+    <div>
+      <img src="./images/cropped-logo-horizontal-350x66.png" alt="Costa Palmeras" class="h-10 w-auto" style="filter:brightness(0) invert(1)" onerror="imgFallback(this)">
+      <p class="mt-5 max-w-xs text-sm leading-relaxed">30 años de experiencia construyendo piscinas de hormigón para toda la vida.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="https://www.instagram.com/piscinascostapalmeras/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 grid place-items-center rounded-full border border-white/20 hover:bg-gold hover:text-night-900 hover:border-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+        <a href="#" aria-label="Facebook" class="w-10 h-10 grid place-items-center rounded-full border border-white/20 hover:bg-gold hover:text-night-900 hover:border-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+        <a href="https://wa.me/5492475492324" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 grid place-items-center rounded-full border border-white/20 hover:bg-gold hover:text-night-900 hover:border-gold transition"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-body text-sm font-semibold text-white mb-4">Navegación</h3>
+      <ul class="space-y-2 text-sm"><li><a class="hover:text-gold-soft" href="#proyecto">El proyecto</a></li><li><a class="hover:text-gold-soft" href="#modelos">Modelos</a></li><li><a class="hover:text-gold-soft" href="#mi-obra">Mi Obra</a></li><li><a class="hover:text-gold-soft" href="#contacto">Contacto</a></li></ul>
+    </div>
+    <div>
+      <h3 class="font-body text-sm font-semibold text-white mb-4">Legal</h3>
+      <ul class="space-y-2 text-sm"><li><a class="hover:text-gold-soft" href="#" data-legal="Términos y condiciones">Términos y condiciones</a></li><li><a class="hover:text-gold-soft" href="#" data-legal="Política de privacidad">Política de privacidad</a></li><li><a class="hover:text-gold-soft" href="miobra.html">Portal de clientes</a></li></ul>
+    </div>
+    <div>
+      <h3 class="font-body text-sm font-semibold text-white mb-4">Novedades de obra</h3>
+      <p class="text-sm">Recibí ideas de diseño y mirá obras nuevas.</p>
+      <form id="newsForm" novalidate class="mt-4">
+        <div class="flex gap-2"><label class="sr-only" for="nMail">Correo</label><input id="nMail" class="field field-dark" style="padding:.7rem 1rem" placeholder="tu@correo.com" type="email" autocomplete="email"><button class="btn-gold shrink-0" style="padding:.7rem 1.1rem" aria-label="Suscribirme"><i data-lucide="arrow-right" class="w-4 h-4"></i></button></div>
+        <p class="msg-err" data-err="email" style="color:#fda4af"></p>
+      </form>
+    </div>
+  </div>
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 mt-14 pt-6 border-t border-white/10 text-xs flex flex-wrap justify-between gap-3">
+    <p>&copy; 2026 Costa Palmeras – Todos los derechos reservados.</p>
+    <p>Av. Guzmán S/N · Rojas, Buenos Aires · 2475 492324</p>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante (enlace original) -->
+<a href="https://wa.me/5492475492324?text=Hola,%20quisiera%20consultar%20por%20una%20piscina" class="wa-float" target="_blank" rel="noopener" aria-label="Contacto por WhatsApp"><i data-lucide="message-circle" class="w-7 h-7"></i></a>
+
+<!-- ========== [BLOQUE 14] MODALES ========== -->
+<!-- Modal de obra (ficha técnica + carrusel) -->
+<div id="obraModal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white text-night-900 shadow-2xl grid lg:grid-cols-[1.1fr_.9fr]">
+    <button class="close absolute top-3 right-3 z-10 w-10 h-10 grid place-items-center rounded-full bg-night-900/80 text-white hover:bg-night-900" style="background:rgba(6,43,27,.8)" aria-label="Cerrar"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <div class="bg-night-900" style="background:#062B1B">
+      <div class="relative aspect-[4/3] lg:aspect-auto lg:h-[70%] overflow-hidden">
+        <img id="mImg" alt="" class="w-full h-full object-cover" onerror="imgFallback(this)">
+        <button id="mPrev" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-white/85 hover:bg-white" aria-label="Foto anterior"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+        <button id="mNext" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-white/85 hover:bg-white" aria-label="Foto siguiente"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+        <span id="mCount" class="absolute bottom-3 right-3 text-xs bg-night-900/80 text-white rounded-full px-3 py-1" style="background:rgba(6,43,27,.8)"></span>
+      </div>
+      <div id="mThumbs" class="flex gap-2 p-3 overflow-x-auto"></div>
+    </div>
+    <div class="p-7 sm:p-9">
+      <p id="mStatus" class="inline-block rounded-full bg-sand-200 px-3 py-1 text-xs font-semibold text-night-700"></p>
+      <h3 id="mTitle" class="mt-3 text-3xl font-semibold leading-tight"></h3>
+      <p id="mDate" class="text-sm text-night-700/70 mt-1"></p>
+      <p id="mDesc" class="mt-4 text-night-700/90 leading-relaxed"></p>
+      <h4 class="mt-6 font-semibold">Materiales y especificaciones</h4>
+      <ul id="mSpecs" class="mt-3 space-y-2 text-sm"></ul>
+      <a id="mWa" target="_blank" rel="noopener" class="btn-gold mt-8 w-full"><i data-lucide="message-circle" class="w-5 h-5"></i> Consultar por este tipo de obra</a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de detalle de caldera eléctrica -->
+<div id="amenityModal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="amenityTitle">
+  <div class="sheet relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white text-night-900 shadow-2xl grid lg:grid-cols-[1.1fr_.9fr]">
+    <button class="close absolute top-3 right-3 z-10 w-10 h-10 grid place-items-center rounded-full text-white hover:bg-night-900" style="background:rgba(6,43,27,.8)" aria-label="Cerrar"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <div class="relative min-h-[260px] bg-night-900 lg:min-h-[560px]">
+      <img id="amenityImage" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="imgFallback(this)">
+      <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(6,43,27,.08),rgba(6,43,27,.62))"></div>
+      <div class="absolute bottom-6 left-6 right-6 text-white"><span class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-night-900/35 px-3 py-1.5 text-sm backdrop-blur"><i data-lucide="thermometer-sun" class="w-4 h-4 text-gold-soft"></i> Agua a tu temperatura</span></div>
+    </div>
+    <div class="p-7 sm:p-9 lg:pt-12">
+      <p class="text-sm font-semibold text-teal-deep">CLIMATIZACIÓN</p>
+      <h3 id="amenityTitle" class="mt-3 text-3xl font-semibold leading-tight"></h3>
+      <p id="amenityDescription" class="mt-4 text-night-700/90 leading-relaxed" style="white-space:pre-line"></p>
+      <h4 class="mt-7 font-semibold">Ventajas</h4>
+      <ul id="amenityPoints" class="mt-3 space-y-3 text-sm"></ul>
+      <a id="amenityWhatsApp" target="_blank" rel="noopener" class="btn-gold mt-8 w-full"><i data-lucide="message-circle" class="w-5 h-5"></i> Consultar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal lightbox (galería) -->
+<div id="lightbox" class="overlay" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+  <button class="close absolute top-4 right-4 w-11 h-11 grid place-items-center rounded-full bg-white/15 text-white hover:bg-white/30" aria-label="Cerrar"><i data-lucide="x" class="w-5 h-5"></i></button>
+  <figure class="sheet max-w-5xl w-full"><img id="lbImg" alt="" class="w-full max-h-[80vh] object-contain rounded-2xl" onerror="imgFallback(this)"><figcaption id="lbCap" class="mt-3 text-center text-white/80 text-sm"></figcaption></figure>
+</div>
+
+<!-- Modal de confirmación / mensajes (reemplaza alert()) -->
+<div id="infoModal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="iTitle">
+  <div class="sheet w-full max-w-md rounded-3xl bg-white text-night-900 p-8 text-center shadow-2xl">
+    <div class="mx-auto w-14 h-14 grid place-items-center rounded-full bg-teal-caribe/15 text-teal-deep" style="background:rgba(47,165,102,.14)"><i data-lucide="check" class="w-7 h-7"></i></div>
+    <h3 id="iTitle" class="mt-4 text-3xl font-semibold"></h3>
+    <p id="iText" class="mt-2 text-night-700/80"></p>
+    <button class="close btn-gold mt-6">Entendido</button>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- ========== [BLOQUE 15] JAVASCRIPT ========== -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Utilidades ---------- */
+  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WA = 'https://wa.me/5492475492324?text=';
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]; }); }
+  function icons() { if (window.lucide) lucide.createIcons(); }
+  var U = function (id, w) {
+    if (id.indexOf('./images/') === 0) return id;
+    return 'https://images.unsplash.com/' + id + '?auto=format&fit=crop&w=' + (w || 1200) + '&q=80';
+  };
+
+  function toast(msg) {
+    var t = $('#toast'); t.textContent = msg; t.classList.add('on');
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('on'); }, 2600);
+  }
+
+  /* ---------- Datos editables ---------- */
+  // Serie de seis fotos de piscinas disponible en images/.
+  var P = {
+    a: './images/1-r6drguuvgqyqp11v8me354ossor6keipwsgsdkl4n0.jpg',
+    b: './images/2-r6drh0hwlr6gmotobotuk39kczzdul53xkdp98crlo.jpg',
+    c: './images/3-r6drh9wai3jbusg0ssw490w6aup1zk6fauwk1zytvg.jpg',
+    d: './images/4-r6drhhf00rtmfo53kw54syzv1xnzp509zw4fw7noho.jpg',
+    e: './images/5-r6drhoxpjg3x0ju6cze5cx3jt0mxepu4oxcbqfcj3w.jpg',
+    f: './images/6-r6drhyc3fsgs8ngiu3gf1uq5qvcljovg27v6j6yldo.jpg',
+    g: './images/1-r6drguuvgqyqp11v8me354ossor6keipwsgsdkl4n0.jpg'
+  };
+
+  var AMEN = [
+    { i: 'flower-2',   t: 'Spa e hidromasaje',       d: 'Sector de agua caliente con asientos moldeados y jets de masaje.' },
+    { i: 'footprints', t: 'Playa húmeda',            d: 'Acceso gradual y poco profundo para tomar sol, ideal para chicos.' },
+    { i: 'droplets', t: 'Ionizador', d: 'Tratamiento continuo que ayuda a cuidar el agua y reducir productos químicos.',
+      detail: 'Se integra al sistema de filtrado y libera iones de cobre y plata que ayudan a controlar bacterias y algas de forma continua.\n\nPuede reducir el uso de cloro, suavizar el agua y mantenerla cristalina por más tiempo, con menos olores y mantenimiento.',
+      image: './images/lonizador.jpg', points: ['Iones de cobre y plata', 'Menos uso de productos químicos', 'Agua más suave y cristalina'] },
+    { i: 'filter', t: 'Ablandador electrónico', d: 'Ayuda a reducir los efectos del agua dura y a cuidar el sistema de filtrado.',
+      detail: 'Se instala en la cañería de ingreso y utiliza impulsos electrónicos para tratar el agua dura, reduciendo la adherencia de minerales como calcio y magnesio.\n\nAyuda a prevenir sarro en cañerías, bombas y revestimientos, mejora la eficiencia del filtrado y reduce el mantenimiento sin agregar productos químicos.',
+      image: './images/ablandador.jpg', points: ['Ayuda a prevenir sarro y depósitos minerales', 'Protege cañerías, bombas y superficies', 'Menos mantenimiento y productos químicos'] },
+    { i: 'lightbulb',  t: 'Iluminación LED',         d: 'Luces subacuáticas de colores y escenas para la noche.' },
+    { i: 'thermometer-sun', t: 'Caldera eléctrica', d: 'Climatizá la pileta todo el año con temperatura precisa, sin gas ni emisiones.',
+      detail: 'Se conecta al sistema de filtrado y calienta el agua con resistencias internas para mantener la temperatura deseada durante todo el año. Funciona de forma silenciosa, segura y sin emisiones.\n\nEs ideal para disfrutar la pileta en días frescos y extender la temporada. Es fácil de instalar, requiere poco mantenimiento y permite regular la temperatura con precisión.\n\nUna opción cómoda para piletas residenciales y spas, sin necesidad de gas ni combustibles.',
+      image: './images/caldera-electrica.jpg', points: ['Se integra al sistema de filtrado', 'Temperatura precisa y funcionamiento silencioso', 'Ideal para extender la temporada sin gas ni combustibles'] }
+  ];
+
+  var MODELOS = [
+    { n: 'Clásica',  m: '6 × 3 m',  p: '1,5 m', d: 'Rectangular, simple y atemporal. La más elegida para terrenos urbanos.', w: 6, h: 3 },
+    { n: 'Familiar', m: '8 × 4 m',  p: '1,6 m', d: 'Con escalera romana y playa húmeda. Espacio para nadar y para jugar.',   w: 8, h: 4 },
+    { n: 'Infinity', m: '10 × 4 m', p: '1,5 m', d: 'Borde infinito en uno de sus lados, para terrenos con vista.',            w: 10, h: 4, inf: true },
+    { n: 'Plunge / Spa', m: '3 × 2,5 m', p: '1,2 m', d: 'Piscina compacta de inmersión con sector de hidromasaje.',            w: 3, h: 2.5 }
+  ];
+
+  var FASES = ['Todos', 'Estructura', 'Acabados', 'Zonas comunes', 'Amenidades'];
+  var OBRAS = [
+    { id: 1, fase: 'Estructura', est: 'En ejecución', pct: 45, fecha: '2 oct 2026', t: 'Armado y hormigonado de vaso', d: 'Estructura de hierro y hormigón con terminación de vaso listo para revestir.',
+      fotos: [P.d, P.e, P.a], specs: ['Hormigón estructural para piscinas', 'Armadura de hierro con doble malla', 'Excavación y nivelación del terreno', 'Instalación de cañerías de retorno y desborde'] },
+    { id: 2, fase: 'Acabados', est: '90% completado', pct: 90, fecha: '28 sep 2026', t: 'Revestimiento y bordes', d: 'Colocación de venecitas y coronamiento perimetral antifuego y antideslizante.',
+      fotos: [P.a, P.b, P.c], specs: ['Revestimiento tipo venecita', 'Coronamiento perimetral antideslizante', 'Juntas selladas con material flexible', 'Piletas de limpieza de fondo'] },
+    { id: 3, fase: 'Zonas comunes', est: 'Finalizado', pct: 100, fecha: '15 sep 2026', t: 'Solarium y deck perimetral', d: 'Deck de madera tratada y solado cementicio alrededor de la piscina.',
+      fotos: [P.f, P.c, P.g], specs: ['Deck de madera dura tratada', 'Solado cementicio con terminación antideslizante', 'Desagües pluviales perimetrales', 'Espacio para reposeras y sombrilla'] },
+    { id: 4, fase: 'Amenidades', est: 'En ejecución', pct: 60, fecha: '1 oct 2026', t: 'Sector de hidromasaje', d: 'Spa integrado con asientos ergonómicos y circuito de jets independiente.',
+      fotos: [P.b, P.a, P.g], specs: ['Bomba de hidromasaje independiente', 'Jets orientables', 'Asientos moldeados en hormigón', 'Control de temperatura opcional'] },
+    { id: 5, fase: 'Amenidades', est: 'Finalizado', pct: 100, fecha: '10 sep 2026', t: 'Iluminación LED y automatización', d: 'Luces subacuáticas RGB y tablero para manejar filtrado desde el celular.',
+      fotos: [P.c, P.b, P.f], specs: ['Reflectores LED RGB subacuáticos', 'Tablero de control con app', 'Programación de filtrado diario', 'Transformador de baja tensión'] },
+    { id: 6, fase: 'Estructura', est: 'Finalizado', pct: 100, fecha: '3 sep 2026', t: 'Excavación y vaso terminado', d: 'Piscina de 8 × 4 m lista para recibir el revestimiento en el plazo previsto.',
+      fotos: [P.e, P.d, P.a], specs: ['Excavación con maquinaria propia', 'Vaso de hormigón proyectado', 'Pruebas de estanqueidad', 'Control de niveles final'] }
+  ];
+
+  var GAL = [
+    { c: 'Obras', img: P.a, t: 'Piscina 1' }, { c: 'Obras', img: P.b, t: 'Piscina 2' },
+    { c: 'Obras', img: P.c, t: 'Piscina 3' }, { c: 'Obras', img: P.d, t: 'Piscina 4' },
+    { c: 'Obras', img: P.e, t: 'Piscina 5' }, { c: 'Obras', img: P.f, t: 'Piscina 6' }
+  ];
+
+  var REVS = [
+    { n: 'Yesica Ayerbe',   t: 'Excelente organización y manera de trabajar. Cumplieron todo dentro del tiempo estipulado. Nos hicieron la pile tal cual la pedimos.' },
+    { n: 'Julieta Garilio', t: 'Una experiencia muy buena en todo sentido, resalto el laburo de la cuadrilla, muy respetuosos y amables. Dejaron todo funcionando impecable.' },
+    { n: 'Ana Cordich',     t: 'Muy buena decisión elegir Costa Palmeras. Desde el contacto por asesoramiento hasta el fin de la obra en tiempo y forma.' }
+  ];
+
+  /* ---------- Navbar: estado sólido + enlace activo + menú móvil ---------- */
+  var nav = $('#nav');
+  function onScroll() { nav.classList.toggle('solid', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  var burger = $('#burger'), drawer = $('#drawer');
+  burger.addEventListener('click', function () {
+    var open = drawer.classList.toggle('hidden') === false;
+    burger.setAttribute('aria-expanded', open);
+    nav.classList.add('solid');
+  });
+  $$('.drawer-link').forEach(function (a) { a.addEventListener('click', function () { drawer.classList.add('hidden'); burger.setAttribute('aria-expanded', 'false'); }); });
+
+  // Indicador activo según la sección visible
+  var links = $$('.nav-link');
+  var secObs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  $$('main section[id]').forEach(function (s) { secObs.observe(s); });
+
+  /* ---------- Video del hero: respeta reduced-motion y oculta si falla ---------- */
+  var hv = $('#heroVideo');
+  if (hv) {
+    hv.addEventListener('error', function () { hv.style.display = 'none'; });   // queda la imagen base
+    if (reduce) { hv.removeAttribute('autoplay'); hv.pause(); }
+    else { var pp = hv.play(); if (pp && pp.catch) pp.catch(function () { /* autoplay bloqueado: se ve el poster */ }); }
+  }
+
+  /* ---------- Parallax del hero ---------- */
+  var heroBg = $('#hero-bg'), ticking = false;
+  if (!reduce) {
+    window.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        if (window.scrollY < window.innerHeight * 1.2) heroBg.style.transform = 'translate3d(0,' + (window.scrollY * 0.25) + 'px,0)';
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  /* ---------- Scroll reveal con IntersectionObserver ---------- */
+  var revObs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  function observeReveals(root) { $$('.reveal:not(.in)', root).forEach(function (el) { revObs.observe(el); }); }
+
+  /* ---------- Render: amenidades ---------- */
+  $('#amenGrid').innerHTML = AMEN.map(function (a, i) {
+    var content = '<div class="ico w-14 h-14 grid place-items-center rounded-2xl bg-night-900 text-gold-soft" style="background:#062B1B"><i data-lucide="' + a.i + '" class="w-6 h-6"></i></div>' +
+      '<h3 class="mt-6 text-2xl font-semibold">' + esc(a.t) + '</h3><p class="mt-2 text-night-700/80 text-sm leading-relaxed">' + esc(a.d) + '</p>' +
+      (a.detail ? '<span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-teal-deep">Ver detalles <i data-lucide="arrow-right" class="w-4 h-4"></i></span>' : '');
+    return '<article class="amenity lift reveal rounded-3xl bg-white p-8 border border-sand-200" style="--d:' + (i % 3) * 0.08 + 's">' +
+      (a.detail ? '<button type="button" class="w-full text-left" data-amenity="' + i + '" aria-haspopup="dialog" aria-label="Ver detalles: ' + esc(a.t) + '">' + content + '</button>' : content) + '</article>';
+  }).join('');
+
+  /* ---------- Render: modelos (con plano SVG) ---------- */
+  function plan(m) {
+    var W = 220, H = 120, k = Math.min(170 / m.w, 76 / m.h), w = m.w * k, h = m.h * k, x = (W - w) / 2, y = (H - h) / 2;
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="w-full h-full" role="img" aria-label="Plano de la piscina ' + esc(m.n) + '">' +
+      '<rect x="' + (x - 10) + '" y="' + (y - 10) + '" width="' + (w + 20) + '" height="' + (h + 20) + '" rx="6" fill="#E8E6D6"/>' +
+      '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8" fill="#4CB8C4" opacity=".95"/>' +
+      '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8" fill="none" stroke="#fff" stroke-width="2"/>' +
+      (m.inf ? '<rect x="' + x + '" y="' + (y + h) + '" width="' + w + '" height="5" fill="#2E9BAA"/>' : '') +
+      '<text x="' + (W / 2) + '" y="' + (H - 4) + '" font-size="9" text-anchor="middle" fill="#145A38" font-family="sans-serif">' + esc(m.m) + '</text></svg>';
+  }
+  $('#modelGrid').innerHTML = MODELOS.map(function (m, i) {
+    return '<article class="lift reveal rounded-3xl border border-sand-200 bg-sand-50 overflow-hidden flex flex-col" style="--d:' + i * 0.08 + 's">' +
+      '<div class="h-40 p-4 bg-sand-100" style="background:#F8F5F0">' + plan(m) + '</div>' +
+      '<div class="p-6 flex-1 flex flex-col"><h3 class="text-3xl font-semibold">' + esc(m.n) + '</h3>' +
+      '<p class="mt-1 text-sm font-semibold text-teal-deep">' + esc(m.m) + ' · profundidad ' + esc(m.p) + '</p>' +
+      '<p class="mt-3 text-sm text-night-700/80 leading-relaxed flex-1">' + esc(m.d) + '</p>' +
+      '<button class="pick mt-5 btn-gold w-full" data-model="' + esc(m.n) + '" style="padding:.7rem 1rem;font-size:.9rem">Quiero este modelo</button></div></article>';
+  }).join('');
+  $$('.pick').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var sel = $('#cModel'); for (var i = 0; i < sel.options.length; i++) if (sel.options[i].text.indexOf(b.dataset.model) === 0) sel.selectedIndex = i;
+      $('#contacto').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); toast('Modelo ' + b.dataset.model + ' seleccionado');
+    });
+  });
+
+  /* ---------- MI OBRA: filtros + grid dinámico ---------- */
+  var faseActual = 'Todos';
+  function renderFilters() {
+    $('#obraFilters').innerHTML = FASES.map(function (f) {
+      return '<button class="chip" aria-pressed="' + (f === faseActual) + '" data-f="' + f + '">' + f + '</button>';
+    }).join('');
+    $$('#obraFilters .chip').forEach(function (b) { b.addEventListener('click', function () { faseActual = b.dataset.f; renderFilters(); renderObras(); }); });
+  }
+  function renderObras() {
+    var list = OBRAS.filter(function (o) { return faseActual === 'Todos' || o.fase === faseActual; });
+    $('#obraCount').textContent = list.length + (list.length === 1 ? ' avance' : ' avances') + (faseActual === 'Todos' ? '' : ' en ' + faseActual.toLowerCase());
+    var g = $('#obraGrid');
+    g.innerHTML = list.map(function (o, i) {
+      var done = o.pct === 100;
+      return '<article class="obra-card lift group rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur" style="animation-delay:' + i * 0.06 + 's">' +
+        '<div class="relative aspect-[4/3] overflow-hidden zoom"><img src="' + U(o.fotos[0], 900) + '" alt="' + esc(o.t) + '" loading="lazy" class="w-full h-full object-cover" onerror="imgFallback(this)">' +
+        '<span class="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-semibold ' + (done ? 'bg-teal-caribe text-night-900' : 'bg-gold text-night-900') + '" style="background:' + (done ? '#2FA566' : '#FFB81C') + '">' + esc(o.est) + '</span></div>' +
+        '<div class="p-6"><p class="text-xs text-white/55">' + esc(o.fase) + ' · actualizado ' + esc(o.fecha) + '</p>' +
+        '<h3 class="mt-1 text-2xl font-semibold leading-snug">' + esc(o.t) + '</h3>' +
+        '<p class="mt-2 text-sm text-white/70 leading-relaxed">' + esc(o.d) + '</p>' +
+        '<div class="progress mt-5" role="progressbar" aria-valuenow="' + o.pct + '" aria-valuemin="0" aria-valuemax="100"><i data-w="' + o.pct + '"></i></div>' +
+        '<button class="open mt-5 w-full btn-ghost justify-center" data-id="' + o.id + '">Ver ficha técnica y galería</button></div></article>';
+    }).join('');
+    requestAnimationFrame(function () { $$('.progress i', g).forEach(function (b) { b.style.width = b.dataset.w + '%'; }); });
+    $$('.open', g).forEach(function (b) { b.addEventListener('click', function () { openObra(+b.dataset.id, b); }); });
+  }
+
+  /* ---------- Gestión genérica de modales (ESC, clic fuera, foco) ---------- */
+  var lastFocus = null, openModalEl = null;
+  function openOverlay(el, trigger) {
+    lastFocus = trigger || document.activeElement; openModalEl = el;
+    el.classList.add('open'); document.body.classList.add('lock'); icons();
+    var f = $('.close', el); if (f) f.focus();
+  }
+  function closeOverlay() {
+    if (!openModalEl) return;
+    openModalEl.classList.remove('open'); document.body.classList.remove('lock'); openModalEl = null;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $$('.overlay').forEach(function (ov) {
+    ov.addEventListener('mousedown', function (e) { if (e.target === ov) closeOverlay(); });     // clic fuera
+    $$('.close', ov).forEach(function (b) { b.addEventListener('click', closeOverlay); });
+  });
+
+  $('#amenGrid').addEventListener('click', function (e) {
+    var trigger = e.target.closest('[data-amenity]'); if (!trigger) return;
+    var amenity = AMEN[+trigger.dataset.amenity]; if (!amenity || !amenity.detail) return;
+    $('#amenityImage').src = U(amenity.image, 1400);
+    $('#amenityImage').alt = amenity.t;
+    $('#amenityTitle').textContent = amenity.t;
+    $('#amenityDescription').textContent = amenity.detail;
+    $('#amenityPoints').innerHTML = amenity.points.map(function (point) {
+      return '<li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-deep shrink-0 mt-0.5"></i><span>' + esc(point) + '</span></li>';
+    }).join('');
+    $('#amenityWhatsApp').href = WA + encodeURIComponent('Hola, quisiera consultar por la caldera eléctrica para mi pileta.');
+    openOverlay($('#amenityModal'), trigger);
+  });
+
+  /* ---------- Modal de obra: carrusel ---------- */
+  var cur = null, idx = 0;
+  function showPhoto(i) {
+    idx = (i + cur.fotos.length) % cur.fotos.length;
+    var img = $('#mImg'); img.src = U(cur.fotos[idx], 1400); img.alt = cur.t + ', foto ' + (idx + 1);
+    $('#mCount').textContent = (idx + 1) + ' / ' + cur.fotos.length;
+    $$('#mThumbs .thumb').forEach(function (t, k) { t.classList.toggle('on', k === idx); });
+  }
+  function openObra(id, trigger) {
+    cur = OBRAS.filter(function (o) { return o.id === id; })[0]; if (!cur) return;
+    $('#mTitle').textContent = cur.t; $('#mStatus').textContent = cur.est + ' · ' + cur.fase;
+    $('#mDate').textContent = 'Actualizado el ' + cur.fecha; $('#mDesc').textContent = cur.d;
+    $('#mSpecs').innerHTML = cur.specs.map(function (s) { return '<li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-deep shrink-0 mt-0.5"></i><span>' + esc(s) + '</span></li>'; }).join('');
+    $('#mThumbs').innerHTML = cur.fotos.map(function (f, k) {
+      return '<button class="thumb shrink-0 w-20 h-14 rounded-lg overflow-hidden" data-k="' + k + '" aria-label="Ver foto ' + (k + 1) + '"><img src="' + U(f, 300) + '" alt="" class="w-full h-full object-cover" onerror="imgFallback(this)"></button>';
+    }).join('');
+    $$('#mThumbs .thumb').forEach(function (t) { t.addEventListener('click', function () { showPhoto(+t.dataset.k); }); });
+    $('#mWa').href = WA + encodeURIComponent('Hola, vi la obra "' + cur.t + '" y quisiera consultar.');
+    showPhoto(0); openOverlay($('#obraModal'), trigger);
+  }
+  $('#mPrev').addEventListener('click', function () { showPhoto(idx - 1); });
+  $('#mNext').addEventListener('click', function () { showPhoto(idx + 1); });
+
+  /* ---------- Galería con filtros + lightbox ---------- */
+  var galCats = ['Todas'].concat(GAL.map(function (g) { return g.c; }).filter(function (c, i, a) { return a.indexOf(c) === i; }));
+  var galCur = 'Todas';
+  function renderGal() {
+    $('#galFilters').innerHTML = galCats.map(function (c) { return '<button class="chip chip-light" aria-pressed="' + (c === galCur) + '" data-c="' + c + '">' + c + '</button>'; }).join('');
+    $$('#galFilters .chip').forEach(function (b) { b.addEventListener('click', function () { galCur = b.dataset.c; renderGal(); }); });
+    $('#galGrid').innerHTML = GAL.filter(function (g) { return galCur === 'Todas' || g.c === galCur; }).map(function (g, i) {
+      var tall = i % 3 === 1 ? 'aspect-[3/4]' : 'aspect-[4/3]';
+      return '<button class="obra-card zoom lift block w-full overflow-hidden rounded-2xl ' + tall + ' relative text-left" data-img="' + g.img + '" data-t="' + esc(g.t) + '" style="animation-delay:' + i * 0.05 + 's">' +
+        '<img src="' + U(g.img, 800) + '" alt="' + esc(g.t) + '" loading="lazy" class="w-full h-full object-cover" onerror="imgFallback(this)">' +
+        '<span class="absolute inset-x-0 bottom-0 p-4 text-white text-sm" style="background:linear-gradient(transparent,rgba(6,43,27,.85))">' + esc(g.t) + '</span></button>';
+    }).join('');
+    $$('#galGrid button').forEach(function (b) {
+      b.addEventListener('click', function () { $('#lbImg').src = U(b.dataset.img, 1600); $('#lbImg').alt = b.dataset.t; $('#lbCap').textContent = b.dataset.t; openOverlay($('#lightbox'), b); });
+    });
+  }
+
+  /* ---------- Reseñas ---------- */
+  var star = '<i data-lucide="star" class="w-4 h-4 fill-current"></i>';
+  var stars = $('#stars'), reviews = $('#reviews');
+  if (stars && reviews) {
+    stars.innerHTML = star + star + star + star + star;
+    reviews.innerHTML = REVS.map(function (r, i) {
+      return '<figure class="reveal rounded-3xl bg-sand-50 border border-sand-200 p-7" style="--d:' + i * 0.1 + 's"><div class="flex text-sun mb-3" aria-label="5 estrellas">' + star + star + star + star + star + '</div>' +
+        '<blockquote class="text-night-700 leading-relaxed">“' + esc(r.t) + '”</blockquote><figcaption class="mt-4 font-semibold">' + esc(r.n) + '</figcaption></figure>';
+    }).join('');
+  }
+
+  /* ---------- Validación de formularios ---------- */
+  var RULES = {
+    name:  function (v) { return v.trim().length >= 3 ? '' : 'Ingresá tu nombre completo.'; },
+    email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Ingresá un correo válido, por ejemplo nombre@correo.com.'; },
+    phone: function (v) { return v.replace(/\D/g, '').length >= 8 ? '' : 'Ingresá un teléfono de al menos 8 dígitos.'; },
+    month: function (v) { return v ? '' : 'Elegí una opción.'; },
+    model: function (v) { return v ? '' : 'Elegí un modelo o "Todavía no lo sé".'; },
+    msg:   function (v) { return v.trim().length >= 10 ? '' : 'Contanos un poco más (mínimo 10 caracteres).'; }
+  };
+  function checkField(form, el) {
+    var rule = RULES[el.name]; if (!rule) return true;
+    var err = rule(el.value), out = $('[data-err="' + el.name + '"]', form);
+    el.classList.toggle('bad', !!err); el.classList.toggle('ok', !err && el.value !== '');
+    if (out) out.textContent = err; el.setAttribute('aria-invalid', !!err);
+    return !err;
+  }
+  function wireForm(id, onValid) {
+    var form = $(id); if (!form) return;
+    $$('input,select,textarea', form).forEach(function (el) {
+      el.addEventListener('blur', function () { checkField(form, el); });
+      el.addEventListener('input', function () { if (el.classList.contains('bad')) checkField(form, el); });
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = true, first = null;
+      $$('input,select,textarea', form).forEach(function (el) { if (!checkField(form, el)) { ok = false; first = first || el; } });
+      if (!ok) { first.focus(); return; }
+      onValid(form); form.reset(); $$('.ok', form).forEach(function (x) { x.classList.remove('ok'); });
+    });
+  }
+  function info(title, text) { $('#iTitle').textContent = title; $('#iText').textContent = text; openOverlay($('#infoModal')); }
+
+  wireForm('#quickForm', function (f) {
+    info('Recibimos tu consulta', 'Te escribimos por WhatsApp para confirmar la fecha estimada de inicio de obra.');
+  });
+  wireForm('#contactForm', function (f) {
+    info('¡Gracias! Consulta enviada', 'Nuestro equipo de ventas te contactará para coordinar la visita al terreno. También podés escribirnos al 2475 492324.');
+  });
+  wireForm('#newsForm', function () { info('Suscripción confirmada', 'Vas a recibir novedades de obra e ideas de diseño en tu correo.'); });
+
+  /* ---------- Copiar contacto y enlaces legales ---------- */
+  $$('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.dataset.copy;
+      (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).then(function () { toast('Copiado: ' + v); }, function () { toast('Copiá manualmente: ' + v); });
+    });
+  });
+  $$('[data-legal]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); info(a.dataset.legal, 'Este documento estará disponible próximamente. Para consultas escribinos a ventas@costapalmeras.com.'); });
+  });
+
+  /* ---------- Teclado: ESC cierra, flechas navegan el carrusel ---------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeOverlay();
+    if (openModalEl && openModalEl.id === 'obraModal') {
+      if (e.key === 'ArrowLeft') showPhoto(idx - 1);
+      if (e.key === 'ArrowRight') showPhoto(idx + 1);
+    }
+  });
+
+  /* ---------- Inicio ---------- */
+  function read(k) {
+    try { var v = JSON.parse(localStorage.getItem(k)); if (v !== null) return v; } catch (e) {}
+    try { var o = JSON.parse(window.name); return (o && o.__cp && o.__cp[k]) || null; } catch (e) {}
+    return null;
+  }
+  var email = read('cp_session');
+  var users = read('cp_users') || {};
+  var u = email && users[email];
+  if (u) {
+    var nombre = String(u.name).split(' ')[0];
+    $$('a[href="miobra.html"]').forEach(function (a) {
+      var w = document.createTreeWalker(a, NodeFilter.SHOW_TEXT), n;
+      while ((n = w.nextNode())) {
+        if (n.nodeValue.indexOf('Iniciar sesión') > -1) n.nodeValue = n.nodeValue.replace('Iniciar sesión', 'Hola, ' + nombre);
+      }
+    });
+  }
+
+  renderFilters(); renderObras(); renderGal();
+  icons(); observeReveals();
+  // Revela también las tarjetas creadas dinámicamente
+  new MutationObserver(function () { observeReveals(); }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+</body>
+</html>
